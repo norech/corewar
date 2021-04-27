@@ -68,7 +68,7 @@ clean:
 	rm -f $(TARGET)
 
 fclean: clean
-	$(MAKE) -C ./lib/my/ fclean
+	$(MAKE) -C ../lib/my/ fclean
 	rm -f *.gc* unit_tests
 
 re: fclean all
