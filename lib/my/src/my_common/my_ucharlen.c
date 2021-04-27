@@ -1,0 +1,21 @@
+/*
+** EPITECH PROJECT, 2020
+** my_numlen
+** File description:
+** Get length of a number
+*/
+#include <my.h>
+
+int my_ucharlen(unsigned char number, int radix)
+{
+    int length = 0;
+
+    if (radix < 2)
+        return (-1);
+    while (number >= radix) {
+        length++;
+        number /= radix;
+    }
+    length++;
+    return (length);
+}

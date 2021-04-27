@@ -39,7 +39,27 @@ TARGET = corewar
 
 TARGET_TEST = unit_tests
 
-SRC =	\
+SRC_DATATYPE = 	src/datatype/fetch_char.c \
+				src/datatype/fetch_int.c \
+				src/datatype/fetch_str.c \
+				src/datatype/fetch_uchar.c \
+			
+SRC_DEBUG = 	src/debug/debug_and_pause.c \
+				src/debug/diff_memory.c \
+				src/debug/dump_memory.c \
+
+SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
+				src/memory/jump_relative_bytes.c \
+				src/memory/write_relative_bytes.c \
+				src/memory/write_file_in_memory.c \
+
+SRC_PARSER =	src/parser/parse_arithmetic_bc.c \
+				src/parser/parse_put_bc.c \
+
+SRC =	$(SRC_DATATYPE) \
+		$(SRC_DEBUG) \
+		$(SRC_MEMORY) \
+		$(SRC_PARSER) \
 
 TESTS =	\
 

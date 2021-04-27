@@ -32,6 +32,7 @@ SRC_COMMON =	\
 	src/my_common/my_put_nbr.c \
 	src/my_common/my_put_u_nbr.c \
 	src/my_common/my_put_nbr_base.c \
+	src/my_common/my_ucharlen.c \
 	src/my_common/my_intlen.c \
 	src/my_common/my_longlen.c \
 	src/my_common/my_longlonglen.c \

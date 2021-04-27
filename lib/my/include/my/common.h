@@ -42,6 +42,8 @@ int           my_lltoa(char *output, long long int nb, int radix);
 
 int           my_size_t_to_string(char *output, size_t nb, int radix);
 
+int           my_ucharlen(unsigned char number, int radix);
+
 int           my_intlen(int number, int base);
 
 int           my_longlen(long number, int base);
