@@ -60,6 +60,7 @@ SRC =	$(SRC_DATATYPE) \
 		$(SRC_DEBUG) \
 		$(SRC_MEMORY) \
 		$(SRC_PARSER) \
+		src/op.c \
 
 TESTS =	\
 
