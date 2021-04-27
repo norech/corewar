@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -W -Wall -Werror -I../include -L../lib -DSOFT_TYPES
+CFLAGS = -W -Wall -Werror -I../include -L../lib -DCOREWAR_ASM -DSOFT_TYPES
 
 ifeq ($(EPIDEBUG), 1)
 	CFLAGS += -Wno-error=init-self -Winit-self
@@ -39,7 +39,12 @@ TARGET = asm
 
 TARGET_TEST = unit_tests
 
-SRC =	\
+SRC_BYTECODE = 	src/bytecode/bc_add.c \
+				src/bytecode/bc_mul.c \
+				src/bytecode/bc_put.c \
+				src/bytecode/bc_sub.c \
+
+SRC =	$(SRC_BYTECODE) \
 
 TESTS =	\
 

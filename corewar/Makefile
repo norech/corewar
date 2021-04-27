@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -W -Wall -Werror -I../include -L../lib -DSOFT_TYPES
+CFLAGS = -W -Wall -Werror -I../include -L../lib -DCOREWAR_VM -DSOFT_TYPES
 
 ifeq ($(EPIDEBUG), 1)
 	CFLAGS += -Wno-error=init-self -Winit-self
