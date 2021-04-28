@@ -43,27 +43,37 @@ typedef struct arg {
     };
 } args_t;
 
+typedef struct {
+    unsigned char data;
+    unsigned char owner;
+} memory_slot_t;
+
 ///
 /// the interface between any memory access and the memory array
 ///
 typedef struct program_memory {
     ///
+    /// Owner id to use when memory is rewritten
+    ///
+    unsigned char owner_id;
+
+    ///
     /// start position of the accessible memory array.
     ///
-    char *start_pos;
+    memory_slot_t *start_pos;
 
     ///
     /// end position of the accessible memory array.
     /// usually `start_pos + length`.
     ///
-    char *end_pos;
+    memory_slot_t *end_pos;
 
     ///
     /// current position in memory.
     /// any operation in memory or execution is done at this address.
     /// can be used as a program counter (PC).
     ///
-    char *pos;
+    memory_slot_t *pos;
 } program_memory_t;
 
 ///
@@ -109,5 +119,7 @@ struct operation {
     ///
     bool (*parse_bytecode)(output_op_t *op, program_memory_t *mem);
 };
+
+#define COUNTOF(arr) (sizeof(arr) / sizeof(*arr))
 
 #endif /* D2C3323B_231E_4734_9476_D89C4C20A637 */

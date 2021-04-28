@@ -10,7 +10,7 @@
 
 #include <my/types.h>
 
-int my_printf(char *s, ...);
+int my_printf(const char *s, ...);
 
 int my_dprintf(fd_t fd, char *s, ...);
 

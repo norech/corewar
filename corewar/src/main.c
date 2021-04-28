@@ -14,9 +14,11 @@
 
 bool create_champion(program_memory_t *champ, program_memory_t *mem, char *file)
 {
+    mem->owner_id++;
     champ->start_pos = mem->start_pos;
     champ->end_pos = mem->end_pos;
     champ->pos = mem->pos;
+    champ->owner_id = mem->owner_id;
     if (write_file_in_memory(mem, file) == false)
         return (false);
     jump_relative_bytes(mem, 150);
@@ -25,11 +27,11 @@ bool create_champion(program_memory_t *champ, program_memory_t *mem, char *file)
 
 int main(int ac, char *av[])
 {
-    char memory[4096] = {0};
+    memory_slot_t *memory = my_calloc(MEM_SIZE, sizeof(memory_slot_t));
     program_memory_t mem = {
         .start_pos = memory,
-        .end_pos = memory + sizeof(memory),
-        .pos = memory
+        .end_pos = memory + MEM_SIZE,
+        .pos = memory + MEM_SIZE - 1019
     };
     program_memory_t champ[ac - 1];
     output_op_t op;
@@ -40,7 +42,7 @@ int main(int ac, char *av[])
             return (84);
     mem.pos = champ[0].pos;
     while (true) {
-        code = *mem.pos;
+        code = mem.pos->data;
         if (code == 0x00)
             break;
         OP[code].parse_bytecode(&op, &mem);

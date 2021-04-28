@@ -11,20 +11,29 @@
 #include <corewar/corewar.h>
 #include <corewar/op.h>
 
+static const char *OWNER_COLOR[] = {
+    "\x1b[48;2;20;20;100m",
+    "\x1b[48;2;150;20;20m",
+    "\x1b[48;2;20;100;20m",
+    "\x1b[48;2;20;20;100m" };
+
 static void print_debug_byte(output_op_t *curr_op, program_memory_t *mem,
     char *old, int index)
 {
     unsigned char old_byte = old[index];
-    unsigned char new_byte = mem->start_pos[index];
+    unsigned char new_byte = mem->start_pos[index].data;
+    int owner = mem->start_pos[index].owner;
 
     if (old_byte == new_byte)
-        my_printf("\x1b[2;37m");
+        my_printf("\x1b[2m");
     if (mem->start_pos + index == mem->pos)
         my_printf("\x1b[1m");
     if (curr_op != NULL
         && mem->start_pos + index >= mem->pos - curr_op->bytecount
         && mem->start_pos + index < mem->pos)
-        my_printf("\x1b[2;33m");
+        my_printf("\x1b[33m");
+    if (owner != 0)
+        my_printf(OWNER_COLOR[owner % COUNTOF(OWNER_COLOR)]);
     if (my_ucharlen(new_byte, 16) < 2)
         my_printf("0");
     my_printf("%x\x1b[0m", new_byte);
