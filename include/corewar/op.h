@@ -8,6 +8,8 @@
 #ifndef F0FDE37D_FFB1_46A6_8733_52016F7FF56D
 #define F0FDE37D_FFB1_46A6_8733_52016F7FF56D
 
+#include <corewar/corewar.h>
+
 ///
 /// the operations and their opcodes
 ///
