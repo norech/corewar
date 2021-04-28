@@ -11,7 +11,7 @@
 
 void bc_mul(int fd, int val1, int val2)
 {
-    unsigned char code = OP_MUL;
+    byte_t code = OP_MUL;
 
     write(fd, &code, 1);
     write(fd, &val1, sizeof(val1));

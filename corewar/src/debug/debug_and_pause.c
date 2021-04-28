@@ -20,8 +20,8 @@ static const char *OWNER_COLOR[] = {
 static void print_debug_byte(output_op_t *curr_op, program_memory_t *mem,
     char *old, int index)
 {
-    unsigned char old_byte = old[index];
-    unsigned char new_byte = mem->start_pos[index].data;
+    byte_t old_byte = old[index];
+    byte_t new_byte = mem->start_pos[index].data;
     int owner = mem->start_pos[index].owner;
 
     if (old_byte == new_byte)
@@ -39,7 +39,7 @@ static void print_debug_byte(output_op_t *curr_op, program_memory_t *mem,
     my_printf("%x\x1b[0m", new_byte);
 }
 
-static void debug_memory(output_op_t *curr_op, program_memory_t *mem)
+void debug_memory(output_op_t *curr_op, program_memory_t *mem)
 {
     size_t len = mem->end_pos - mem->start_pos;
     static char *old = NULL;
@@ -62,6 +62,12 @@ static void print_arg(args_t *arg)
     switch (arg->type) {
         case ARG_CHAR:
             my_printf("%c", arg->chr_val);
+            break;
+        case ARG_BYTE:
+            my_printf("0x");
+            if (my_ucharlen(arg->byt_val, 16) < 2)
+                my_printf("0");
+            my_printf("%x", arg->chr_val);
             break;
         case ARG_INT:
             my_printf("%d", arg->int_val);

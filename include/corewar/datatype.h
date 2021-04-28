@@ -36,11 +36,11 @@ int fetch_int(int *int_val, program_memory_t *mem);
 int fetch_str(char **str_val, program_memory_t *mem);
 
 ///
-/// fetch an unsigned char from the memory and move position to the next bytes.
+/// fetch a byte from the memory and move position to the next bytes.
 /// fills the `chr_val` argument with the value.
 /// returns 0 on success.
 /// returns -1 on error.
 ///
-int fetch_uchar(unsigned char *chr_val, program_memory_t *mem);
+int fetch_byte(byte_t *chr_val, program_memory_t *mem);
 
 #endif /* CCAA70C1_76EE_4C10_A2D1_BD1B7137312A */

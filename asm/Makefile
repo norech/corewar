@@ -25,7 +25,7 @@ endif
 
 LFLAGS = -lmy
 
-TEST_FLAGS = $(LFLAGS) -lcriterion --coverage
+TEST_FLAGS = $(LFLAGS) -lcriterion --coverage -Wno-declaration-after-statement
 
 LIB_MODULES = \
 	LIB_FAST=1 \

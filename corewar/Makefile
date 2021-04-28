@@ -25,7 +25,7 @@ endif
 
 LFLAGS = -lmy
 
-TEST_FLAGS = $(LFLAGS) -lcriterion --coverage
+TEST_FLAGS = $(LFLAGS) -lcriterion --coverage -Wno-declaration-after-statement
 
 LIB_MODULES = \
 	LIB_FAST=1 \
@@ -42,7 +42,7 @@ TARGET_TEST = unit_tests
 SRC_DATATYPE = 	src/datatype/fetch_char.c \
 				src/datatype/fetch_int.c \
 				src/datatype/fetch_str.c \
-				src/datatype/fetch_uchar.c \
+				src/datatype/fetch_byte.c \
 			
 SRC_DEBUG = 	src/debug/debug_and_pause.c \
 				src/debug/diff_memory.c \
@@ -62,7 +62,13 @@ SRC =	$(SRC_DATATYPE) \
 		$(SRC_PARSER) \
 		src/op.c \
 
-TESTS =	\
+TESTS =	../tests/corewar/copy_relative_bytes.c \
+		../tests/corewar/jump_relative_bytes.c \
+		../tests/corewar/write_relative_bytes.c \
+		../tests/corewar/fetch_byte.c \
+		../tests/corewar/fetch_char.c \
+		../tests/corewar/fetch_int.c \
+		../tests/corewar/fetch_str.c \
 
 all: build_lib build_all
 

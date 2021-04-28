@@ -11,7 +11,7 @@
 
 void bc_sub(int fd, int val1, int val2)
 {
-    unsigned char code = OP_SUB;
+    byte_t code = OP_SUB;
 
     write(fd, &code, 1);
     write(fd, &val1, sizeof(val1));

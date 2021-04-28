@@ -11,4 +11,6 @@
 -Walloc-zero
 -Wcast-qual
 -Wextra
+-DCOREWAR_VM
+-DCOREWAR_ASM
 -I./include

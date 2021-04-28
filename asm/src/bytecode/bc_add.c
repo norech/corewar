@@ -11,7 +11,7 @@
 
 void bc_add(int fd, int val1, int val2)
 {
-    unsigned char code = OP_ADD;
+    byte_t code = OP_ADD;
 
     write(fd, &code, 1);
     write(fd, &val1, sizeof(val1));

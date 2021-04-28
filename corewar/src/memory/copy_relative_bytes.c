@@ -11,9 +11,9 @@ void copy_relative_bytes(void *dest, program_memory_t *mem, size_t count)
 {
     long offset = mem->pos - mem->start_pos;
     long size = mem->end_pos - mem->start_pos;
-    unsigned char *dest_bytes = (unsigned char *)dest;
+    byte_t *dest_bytes = (byte_t *)dest;
 
     for (size_t i = 0; i < count; i++) {
-        dest_bytes[i] = mem->start_pos[(offset + i) % (size + 1)].data;
+        dest_bytes[i] = mem->start_pos[(offset + i) % size].data;
     }
 }

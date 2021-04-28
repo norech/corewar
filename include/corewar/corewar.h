@@ -16,10 +16,16 @@
 ///
 enum arg_type {
     ARG_CHAR,
+    ARG_BYTE,
     ARG_INT,
     ARG_STR,
     ARG_PTR
 };
+
+///
+/// Unsigned char, used for byte representation
+///
+typedef unsigned char byte_t;
 
 ///
 /// an argument passed to a parsed operation
@@ -37,6 +43,7 @@ typedef struct arg {
     ///
     union {
         char chr_val;
+        byte_t byt_val;
         int int_val;
         void *ptr_val;
         char *str_val;
@@ -44,8 +51,8 @@ typedef struct arg {
 } args_t;
 
 typedef struct {
-    unsigned char data;
-    unsigned char owner;
+    byte_t data;
+    byte_t owner;
 } memory_slot_t;
 
 ///
@@ -55,7 +62,7 @@ typedef struct program_memory {
     ///
     /// Owner id to use when memory is rewritten
     ///
-    unsigned char owner_id;
+    byte_t owner_id;
 
     ///
     /// start position of the accessible memory array.
@@ -72,6 +79,9 @@ typedef struct program_memory {
     /// current position in memory.
     /// any operation in memory or execution is done at this address.
     /// can be used as a program counter (PC).
+    /// since memory is circular, when doing memory operations
+    /// (from memory.h functions), setting pos to end_pos is the same as
+    /// setting pos to start_pos.
     ///
     memory_slot_t *pos;
 } program_memory_t;
@@ -83,7 +93,7 @@ typedef struct output_op {
     ///
     /// the operation bytecode
     ///
-    unsigned char code;
+    byte_t code;
 
     ///
     /// the number of bytes that the instruction takes
@@ -105,7 +115,7 @@ struct operation {
     ///
     /// the bytecode of the operation
     ///
-    unsigned char code;
+    byte_t code;
 
     ///
     /// the shorthand mnemotic of the operation

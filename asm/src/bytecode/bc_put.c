@@ -11,7 +11,7 @@
 
 void bc_put(int fd, char *word)
 {
-    unsigned char code = OP_PUT;
+    byte_t code = OP_PUT;
     int len = sizeof(char) * my_strlen(word);
 
     write(fd, &code, sizeof(code));

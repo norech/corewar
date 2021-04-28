@@ -15,5 +15,5 @@ void jump_relative_bytes(program_memory_t *mem, size_t increment)
     offset += increment;
     while (offset < 0)
         offset += size;
-    mem->pos = mem->start_pos + (offset % (size + 1));
+    mem->pos = mem->start_pos + (offset % size);
 }
