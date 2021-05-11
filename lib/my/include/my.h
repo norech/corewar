@@ -25,5 +25,11 @@ typedef struct bit_address {
 #define BIT_ADDR_LSB(element, bitsize) \
     BIT_ADDR(element, 8 - bitsize)
 
+#define MY_ASSERT(condition, return_code_on_fail, ...) \
+    if (!(condition)) { \
+        my_dprintf(2, "%s:%d: Assertion '%s' failed: %s\n", \
+        __FILE__, __LINE__, #condition, ##__VA_ARGS__, ""); \
+        return (return_code_on_fail); \
+    }
 
 #endif
