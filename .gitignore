@@ -8,6 +8,7 @@
 unit_tests
 asm/asm
 corewar/corewar
+champions
 libmy.a
 include/defmy.h
 include/my.h
