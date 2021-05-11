@@ -39,27 +39,31 @@ TARGET = corewar
 
 TARGET_TEST = unit_tests
 
-SRC_DATATYPE = 	src/datatype/fetch_char.c \
-				src/datatype/fetch_int.c \
-				src/datatype/fetch_str.c \
-				src/datatype/fetch_byte.c \
+SRC_DATATYPE = 	src/datatype/fetch_byte.c \
+				src/datatype/fetch_dir.c \
+				src/datatype/fetch_ind.c \
+				src/datatype/fetch_reg.c \
 			
 SRC_DEBUG = 	src/debug/debug_and_pause.c \
 				src/debug/diff_memory.c \
 				src/debug/dump_memory.c \
+				src/debug/print_op.c \
 
 SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
+				src/memory/copy_relative_endian_bytes.c \
 				src/memory/jump_relative_bytes.c \
 				src/memory/write_relative_bytes.c \
 				src/memory/write_file_in_memory.c \
 
-SRC_PARSER =	src/parser/parse_arithmetic_bc.c \
-				src/parser/parse_put_bc.c \
+SRC_PARSER =	src/parser/parse_bytecode.c \
+
+SRC_INSTRUCT = 	src/instructions/zjmp.c \
 
 SRC =	$(SRC_DATATYPE) \
 		$(SRC_DEBUG) \
 		$(SRC_MEMORY) \
 		$(SRC_PARSER) \
+		$(SRC_INSTRUCT) \
 		src/op.c \
 
 TESTS =	../tests/corewar/copy_relative_bytes.c \

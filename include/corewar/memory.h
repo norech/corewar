@@ -12,8 +12,17 @@
 
 ///
 /// copy `count` bytes from the memory (starting from current position).
+/// DO NOT USE IT FOR NUMBERS. USE `copy_relative_endian_bytes` INSTEAD.
 ///
 void copy_relative_bytes(void *dest, program_memory_t *mem, size_t count);
+
+///
+/// copy `count` bytes from the memory (starting from current position).
+/// exactly the same as `copy_relative_bytes`, but the copied bytes are swapped
+/// if the host is not big endian, to keep the correct endianness for numbers.
+///
+void copy_relative_endian_bytes(void *dest, program_memory_t *mem,
+    size_t count);
 
 ///
 /// move to another relative position. adds `increment` to the current position.

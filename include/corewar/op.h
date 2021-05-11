@@ -8,31 +8,41 @@
 #ifndef F0FDE37D_FFB1_46A6_8733_52016F7FF56D
 #define F0FDE37D_FFB1_46A6_8733_52016F7FF56D
 
-#include <corewar/corewar.h>
+#include <stdint.h>
 
 ///
 /// the operations and their opcodes
 ///
 enum operations {
-    OP_ADD = 0x01,
-    OP_SUB = 0x02,
-    OP_MUL = 0x03,
-    OP_PUT = 0x04
+    OP_LIVE  = 0x01,
+    OP_LD    = 0x02,
+    OP_ST    = 0x03,
+    OP_ADD   = 0x04,
+    OP_SUB   = 0x05,
+    OP_AND   = 0x06,
+    OP_OR    = 0x07,
+    OP_XOR   = 0x08,
+    OP_ZJMP  = 0x09,
+    OP_LDI   = 0x0a,
+    OP_STI   = 0x0b,
+    OP_FORK  = 0x0c,
+    OP_LLD   = 0x0d,
+    OP_LLDI  = 0x0e,
+    OP_LFORK = 0x0f,
+    OP_AFF   = 0x10
 };
 
-#if COREWAR_VM
-    #include <corewar/parser.h>
-    ///
-    /// the list of operations
-    ///
-    static const struct operation OP[] = {
-        { 0x00 },
-        { 0x01, "add", &parse_arithmetic_bc },
-        { 0x02, "sub", &parse_arithmetic_bc },
-        { 0x03, "mul", &parse_arithmetic_bc },
-        { 0x04, "put", &parse_put_bc }
-    };
-#endif
+#define OP_COUNT 16
+
+#define OP_START 1
+#define OP_END   17
+
+#define HAS_CODING_BYTE(code) \
+    (code != OP_LIVE && code != OP_ZJMP \
+     && code != OP_FORK && code != OP_LFORK)
+
+#define IS_INVALID_OP(code) \
+    (code == 0x00 || code > 0x10)
 
 #define MEM_SIZE                (6*1024)
 
@@ -96,6 +106,11 @@ typedef struct op_s     op_t;
 #define IND_SIZE        2
 #define DIR_SIZE        4
 #define REG_SIZE        DIR_SIZE
+
+typedef uint16_t ind_t;
+typedef uint32_t dir_t;
+typedef uint8_t reg_id_t;
+typedef uint32_t reg_data_t;
 
 extern  op_t    OP_TAB[];
 

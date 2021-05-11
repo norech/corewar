@@ -8,6 +8,7 @@
 #ifndef D2C3323B_231E_4734_9476_D89C4C20A637
 #define D2C3323B_231E_4734_9476_D89C4C20A637
 
+#include "corewar/op.h"
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -15,12 +16,18 @@
 /// the type of argument
 ///
 enum arg_type {
-    ARG_CHAR,
-    ARG_BYTE,
-    ARG_INT,
-    ARG_STR,
-    ARG_PTR
+    ARG_DIR_NB = T_DIR,
+    ARG_IND_NB = T_IND,
+    ARG_REG_ID = T_REG
 };
+
+#define BYTES_TO_VALUE(bytes_array, type) \
+    (*(type *) bytes_array)
+
+#define GET_CODING_OF_ARG(coding_byte, id) \
+    ((coding_byte >> (2 * id)) & 0b11)
+
+typedef unsigned char arg_type_t;
 
 ///
 /// Unsigned char, used for byte representation
@@ -39,16 +46,22 @@ typedef struct arg {
     ///
     /// the value of the argument.
     /// this union let you access variables by doing
-    /// arg.chr_val or arg->chr_val
+    /// arg.dir_val or arg->dir_val
     ///
     union {
-        char chr_val;
-        byte_t byt_val;
-        int int_val;
-        void *ptr_val;
-        char *str_val;
+        dir_t dir_val;
+        ind_t ind_val;
+        reg_id_t reg_id;
     };
-} args_t;
+
+    ///
+    /// The label attached to the value.
+    /// Should only be used on the ASM parser!
+    /// The VM is supposed to already have the labels resolved as dir_val or
+    /// ind_val.
+    ///
+    char *label;
+} arg_t;
 
 typedef struct {
     byte_t data;
@@ -63,6 +76,11 @@ typedef struct program_memory {
     /// Owner id to use when memory is rewritten
     ///
     byte_t owner_id;
+
+    ///
+    /// Name to display on live call
+    ///
+    char prog_name[PROG_NAME_LENGTH + 1];
 
     ///
     /// start position of the accessible memory array.
@@ -84,12 +102,25 @@ typedef struct program_memory {
     /// setting pos to start_pos.
     ///
     memory_slot_t *pos;
+
+    ///
+    /// registers.
+    ///
+    reg_data_t registers[REG_NUMBER - 1];
+
+    ///
+    /// the carry value
+    ///
+    bool carry;
 } program_memory_t;
+
+#define IS_INVALID_REGISTER_ID(id) \
+    (arg->reg_id <= 0 || arg->reg_id > REG_NUMBER)
 
 ///
 /// the operation that will be is executed.
 ///
-typedef struct output_op {
+typedef struct runtime_op {
     ///
     /// the operation bytecode
     ///
@@ -103,13 +134,13 @@ typedef struct output_op {
     ///
     /// the arguments passed to the instruction
     ///
-    args_t args[4];
+    arg_t args[4];
 
     ///
     /// the number of arguments passed to the instruction
     ///
     int args_count;
-} output_op_t;
+} runtime_op_t;
 
 struct operation {
     ///
@@ -121,14 +152,21 @@ struct operation {
     /// the shorthand mnemotic of the operation
     ///
     char mnemo[6];
-
-    ///
-    /// op is the returned operation
-    /// mem is the memory of the current program
-    /// returns a bool true if an error occured
-    ///
-    bool (*parse_bytecode)(output_op_t *op, program_memory_t *mem);
 };
+
+static inline bool is_host_big_endian(void)
+{
+    unsigned short s = 0xFF00;
+    byte_t *bytes = (byte_t *)&s;
+
+    return (bytes[0] == 0xFF);
+}
+
+static inline bool is_arg_type_valid(byte_t opcode, int arg_index,
+    enum arg_type arg_type)
+{
+    return ((OP_TAB[opcode].type[arg_index] & arg_type) != 0);
+}
 
 #define COUNTOF(arr) (sizeof(arr) / sizeof(*arr))
 

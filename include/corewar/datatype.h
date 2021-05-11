@@ -11,29 +11,28 @@
 #include <corewar/corewar.h>
 
 ///
-/// fetch a char from the memory and move position to the next bytes.
-/// fills the `chr_val` argument with the value.
+/// fetch an indirect value from the memory and move position to the next bytes.
+/// fills the `ind_val` argument with the value.
 /// returns 0 on success.
 /// returns -1 on error.
 ///
-int fetch_char(char *chr_val, program_memory_t *mem);
+int fetch_ind(ind_t *ind_val, program_memory_t *mem);
 
 ///
-/// fetch an int from the memory and move position to the next bytes.
-/// fills the `int_val` argument with the value.
+/// fetch a direct value from the memory and move position to the next bytes.
+/// fills the `dir_val` argument with the value.
 /// returns 0 on success.
 /// returns -1 on error.
 ///
-int fetch_int(int *int_val, program_memory_t *mem);
+int fetch_dir(dir_t *dir_val, program_memory_t *mem);
 
 ///
-/// fetch a string from the memory and move position to the next bytes.
-/// fills the `str_val` argument with the value.
-/// note: DOES allocate memory!
-/// returns the length of the string.
+/// fetch a registry id from the memory and move position to the next bytes.
+/// fills the `reg_id` argument with the value.
+/// returns 0 on success.
 /// returns -1 on error.
 ///
-int fetch_str(char **str_val, program_memory_t *mem);
+int fetch_reg_id(reg_id_t *reg_id, program_memory_t *mem);
 
 ///
 /// fetch a byte from the memory and move position to the next bytes.
@@ -42,5 +41,12 @@ int fetch_str(char **str_val, program_memory_t *mem);
 /// returns -1 on error.
 ///
 int fetch_byte(byte_t *chr_val, program_memory_t *mem);
+
+///
+/// Resolve the value of the argument.
+/// Will resolve indirect values.
+/// Will go in registry.
+///
+reg_data_t resolve_arg_value(arg_t *arg, program_memory_t *mem);
 
 #endif /* CCAA70C1_76EE_4C10_A2D1_BD1B7137312A */
