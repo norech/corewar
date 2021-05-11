@@ -39,12 +39,30 @@ TARGET = asm
 
 TARGET_TEST = unit_tests
 
-SRC_BYTECODE = 	src/bytecode/bc_add.c \
-				src/bytecode/bc_mul.c \
-				src/bytecode/bc_put.c \
-				src/bytecode/bc_sub.c \
+SRC_BYTECODE = 	src/generator/bytecode/bc_coding_byte.c \
+				src/generator/bytecode/bc_zjmp.c \
+
+SRC_UTIL = 		src/util/write_endian.c \
+				src/util/write_reversed.c \
+				src/util/push_instruction.c \
+				src/util/pop_instruction.c \
+				src/util/get_line_num.c \
+
+SRC_PARSER = 	src/parser/parser.c \
+				src/parser/parser_error.c
+
+SRC_CONSUMERS = src/parser/consumers/consume_arg_label.c \
+				src/parser/consumers/consume_comma.c \
+				src/parser/consumers/consume_instruction_mnemo.c \
+				src/parser/consumers/consume_newlines.c \
+				src/parser/consumers/consume_number.c \
+				src/parser/consumers/consume_whitespaces.c
 
 SRC =	$(SRC_BYTECODE) \
+		$(SRC_UTIL) \
+		$(SRC_PARSER) \
+		$(SRC_CONSUMERS) \
+		../corewar/src/op.c
 
 TESTS =	\
 

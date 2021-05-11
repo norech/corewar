@@ -10,22 +10,8 @@
 
 ///
 /// append the function bytecode to fd
+/// returns the size written
 ///
-void bc_add(int fd, int val1, int val2);
-
-///
-/// append the function bytecode to fd
-///
-void bc_mul(int fd, int val1, int val2);
-
-///
-/// append the function bytecode to fd
-///
-void bc_put(int fd, char *word);
-
-///
-/// append the function bytecode to fd
-///
-void bc_sub(int fd, int val1, int val2);
+int bc_zjmp(int fd, int val);
 
 #endif /* A711BABF_52F2_4DF3_B3B6_5CFDFAC5AA76 */
