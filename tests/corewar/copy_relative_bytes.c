@@ -20,6 +20,7 @@ Test(copy_relative_bytes, integer)
 
     program_memory_t *mem = t_create_program_memory(250);
 
+    cr_assert_neq(mem, NULL);
     t_set_bytes_data(mem, &input, sizeof(int));
     mem->pos = mem->start_pos; // we better be sure
 
@@ -50,6 +51,7 @@ Test(copy_relative_bytes, outside_memory_bounds)
 
     program_memory_t *mem = t_create_program_memory(4);
 
+    cr_assert_neq(mem, NULL);
     t_set_bytes_data(mem, input, 4);
     mem->pos = mem->end_pos - 1; // shift the position
 
@@ -66,6 +68,7 @@ Test(copy_relative_bytes, outside_memory_bounds_2)
 
     program_memory_t *mem = t_create_program_memory(4);
 
+    cr_assert_neq(mem, NULL);
     t_set_bytes_data(mem, input, 4);
     mem->pos = mem->start_pos + 1; // shift the position
 
