@@ -20,6 +20,7 @@ Test(fetch_char, basic)
 
     program_memory_t *mem = t_create_program_memory(250);
 
+    cr_assert_neq(mem, NULL);
     t_set_bytes_data(mem, &input, sizeof(input));
     mem->pos = mem->start_pos;
 

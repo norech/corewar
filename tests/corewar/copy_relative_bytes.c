@@ -34,6 +34,7 @@ Test(copy_relative_bytes, str)
 
     program_memory_t *mem = t_create_program_memory(250);
 
+    cr_assert_neq(mem, NULL);
     t_set_bytes_data(mem, &input, sizeof(input));
     mem->pos = mem->start_pos; // we better be sure
 

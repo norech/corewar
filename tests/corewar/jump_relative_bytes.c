@@ -17,6 +17,7 @@ Test(jump_relative_bytes, zero)
 {
     program_memory_t *mem = t_create_program_memory(10);
 
+    cr_assert_neq(mem, NULL);
     mem->pos = mem->start_pos; // we better be sure
 
     jump_relative_bytes(mem, 0);
@@ -27,6 +28,7 @@ Test(jump_relative_bytes, positive)
 {
     program_memory_t *mem = t_create_program_memory(10);
 
+    cr_assert_neq(mem, NULL);
     mem->pos = mem->start_pos; // we better be sure
 
     jump_relative_bytes(mem, 4);
@@ -37,6 +39,7 @@ Test(jump_relative_bytes, negative)
 {
     program_memory_t *mem = t_create_program_memory(10);
 
+    cr_assert_neq(mem, NULL);
     mem->pos = mem->start_pos; // we better be sure
 
     jump_relative_bytes(mem, -4);
@@ -47,6 +50,7 @@ Test(jump_relative_bytes, wayyy_too_far_positive)
 {
     program_memory_t *mem = t_create_program_memory(10);
 
+    cr_assert_neq(mem, NULL);
     mem->pos = mem->start_pos; // we better be sure
 
     jump_relative_bytes(mem, 24);
@@ -57,6 +61,7 @@ Test(jump_relative_bytes, wayyy_too_far_negative)
 {
     program_memory_t *mem = t_create_program_memory(10);
 
+    cr_assert_neq(mem, NULL);
     mem->pos = mem->start_pos; // we better be sure
 
     jump_relative_bytes(mem, -24);
