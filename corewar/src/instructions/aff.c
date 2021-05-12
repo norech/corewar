@@ -12,7 +12,7 @@
 #include <corewar/memory.h>
 #include <corewar/op.h>
 
-bool live(runtime_op_t *op UNUSED, program_memory_t *mem)
+bool aff(runtime_op_t *op UNUSED, program_memory_t *mem)
 {
     if (op->args[0].type != ARG_REG_ID)
         return (false);

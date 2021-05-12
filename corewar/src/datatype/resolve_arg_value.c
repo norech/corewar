@@ -22,7 +22,7 @@ reg_data_t resolve_arg_value(arg_t *arg, program_memory_t *mem)
     }
     if (arg->type == ARG_REG_ID
         && arg->reg_id != 0 && arg->reg_id <= REG_NUMBER) {
-        output = mem->registries[arg->reg_id - 1];
+        output = mem->registers[arg->reg_id - 1];
     }
     return (output);
 }
