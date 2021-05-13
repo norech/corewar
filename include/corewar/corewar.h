@@ -78,11 +78,6 @@ typedef struct program_memory {
     byte_t owner_id;
 
     ///
-    /// Name to display on live call
-    ///
-    char prog_name[PROG_NAME_LENGTH + 1];
-
-    ///
     /// start position of the accessible memory array.
     ///
     memory_slot_t *start_pos;
@@ -113,6 +108,35 @@ typedef struct program_memory {
     ///
     bool carry;
 } program_memory_t;
+
+typedef struct champion {
+
+    ///
+    /// The ID allocated by the VM
+    ///
+    int id;
+
+    ///
+    /// Name to display on live call
+    ///
+    char name[PROG_NAME_LENGTH + 1];
+
+    ///
+    /// Array of all instances
+    /// Must be reallocated on fork if overflow.
+    ///
+    program_memory_t *instances;
+
+    ///
+    /// Number of instances created
+    ///
+    int instances_count;
+
+    ///
+    /// Number of instances that can be created before overflow
+    ///
+    int instances_max;
+} champion_t;
 
 #define IS_INVALID_REGISTER_ID(id) \
     (arg->reg_id <= 0 || arg->reg_id > REG_NUMBER)
@@ -167,6 +191,8 @@ static inline bool is_arg_type_valid(byte_t opcode, int arg_index,
 {
     return ((OP_TAB[opcode].type[arg_index] & arg_type) != 0);
 }
+
+int next_step(program_memory_t *mem, champion_t *champions);
 
 #define COUNTOF(arr) (sizeof(arr) / sizeof(*arr))
 

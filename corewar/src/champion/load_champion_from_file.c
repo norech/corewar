@@ -12,22 +12,24 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-bool write_file_in_memory(program_memory_t *mem, char *file)
+int load_champion_from_file(champion_t *champ, char *file)
 {
     int fd = open(file, O_RDONLY);
     header_t header;
     char buff[1024];
     ssize_t len;
+    memory_slot_t *pos = champ->instances[0].pos;
 
     if (fd < 0)
-        return (false);
+        return (-1);
     if (!read(fd, &header, sizeof(header_t)))
-        return (false);
-    my_memcpy(mem->prog_name, header.prog_name, sizeof(mem->prog_name));
+        return (-1);
+    my_memcpy(champ->name, header.prog_name, sizeof(champ->name));
     while ((len = read(fd, buff, 1024)) != 0) {
         if (len == -1)
-            return (false);
-        write_relative_bytes(mem, buff, len);
+            return (-1);
+        write_relative_bytes(&champ->instances[0], buff, len);
     }
-    return (true);
+    champ->instances[0].pos = pos;
+    return (0);
 }

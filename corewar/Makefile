@@ -43,7 +43,7 @@ SRC_DATATYPE = 	src/datatype/fetch_byte.c \
 				src/datatype/fetch_dir.c \
 				src/datatype/fetch_ind.c \
 				src/datatype/fetch_reg.c \
-			
+
 SRC_DEBUG = 	src/debug/debug_and_pause.c \
 				src/debug/diff_memory.c \
 				src/debug/dump_memory.c \
@@ -53,17 +53,27 @@ SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
 				src/memory/copy_relative_endian_bytes.c \
 				src/memory/jump_relative_bytes.c \
 				src/memory/write_relative_bytes.c \
-				src/memory/write_file_in_memory.c \
 
 SRC_PARSER =	src/parser/parse_bytecode.c \
 
 SRC_INSTRUCT = 	src/instructions/zjmp.c \
+
+SRC_UTIL =		src/util/alloc_memory.c \
+				src/util/init_memory.c \
+				src/util/move_to_champion_pos.c
+
+SRC_CHAMPION = 	src/champion/create_champion.c \
+				src/champion/load_champion_from_file.c \
+				src/champion/load_champion_from_bytes.c
 
 SRC =	$(SRC_DATATYPE) \
 		$(SRC_DEBUG) \
 		$(SRC_MEMORY) \
 		$(SRC_PARSER) \
 		$(SRC_INSTRUCT) \
+		$(SRC_UTIL) \
+		$(SRC_CHAMPION) \
+		src/next_step.c \
 		src/op.c \
 
 TESTS =	../tests/corewar/copy_relative_bytes.c \

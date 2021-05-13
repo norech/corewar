@@ -129,4 +129,14 @@ int consume_label(char **output_label, parser_t *parser);
 ///
 int consume_number(int *output_value, parser_t *parser);
 
+///
+/// Read the input file, then fill the output buffer and the output parser.
+///
+int init_parser_from_file(char *output_buffer, parser_t *output_parser,
+    char *file);
+
+int init_parser(parser_t *output_parser, char *file, char *input);
+
+int read_file(char *output_buffer, char *file);
+
 #endif /* DC348E51_57D5_4ED5_9CDF_0EBCA8AD3A30 */

@@ -42,6 +42,8 @@ TARGET_TEST = unit_tests
 SRC_BYTECODE = 	src/generator/bytecode/bc_coding_byte.c \
 				src/generator/bytecode/bc_zjmp.c \
 
+SRC_GENERATOR = src/generator/init_generator.c
+
 SRC_UTIL = 		src/util/write_endian.c \
 				src/util/write_reversed.c \
 				src/util/push_instruction.c \
@@ -49,7 +51,9 @@ SRC_UTIL = 		src/util/write_endian.c \
 				src/util/get_line_num.c \
 
 SRC_PARSER = 	src/parser/parser.c \
-				src/parser/parser_error.c
+				src/parser/parser_error.c \
+				src/parser/read_file.c \
+				src/parser/init_parser.c
 
 SRC_CONSUMERS = src/parser/consumers/consume_arg_label.c \
 				src/parser/consumers/consume_comma.c \
@@ -58,10 +62,15 @@ SRC_CONSUMERS = src/parser/consumers/consume_arg_label.c \
 				src/parser/consumers/consume_number.c \
 				src/parser/consumers/consume_whitespaces.c
 
+SRC_COMPILER =	src/compiler.c \
+				src/compiler_error.c
+
 SRC =	$(SRC_BYTECODE) \
 		$(SRC_UTIL) \
 		$(SRC_PARSER) \
 		$(SRC_CONSUMERS) \
+		$(SRC_GENERATOR) \
+		$(SRC_COMPILER) \
 		../corewar/src/op.c
 
 TESTS =	\

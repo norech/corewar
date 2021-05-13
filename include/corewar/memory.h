@@ -35,11 +35,4 @@ void jump_relative_bytes(program_memory_t *mem, size_t increment);
 ///
 void write_relative_bytes(program_memory_t *mem, void *src, size_t count);
 
-///
-/// copy the content of the file in the memory (starting from current memory
-/// position), and then move the current memory position at the first byte
-/// after the end (old_pos + file_len).
-///
-bool write_file_in_memory(program_memory_t *mem, char *file);
-
 #endif /* D2BF0B2A_7B9B_4B0B_99BD_994AB378702F */
