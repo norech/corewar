@@ -80,9 +80,6 @@ TESTS =	../tests/corewar/copy_relative_bytes.c \
 		../tests/corewar/jump_relative_bytes.c \
 		../tests/corewar/write_relative_bytes.c \
 		../tests/corewar/fetch_byte.c \
-		../tests/corewar/fetch_char.c \
-		../tests/corewar/fetch_int.c \
-		../tests/corewar/fetch_str.c \
 
 all: build_lib build_all
 
