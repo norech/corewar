@@ -24,7 +24,7 @@ int fetch_ind(ind_t *ind_val, program_memory_t *mem);
 /// returns 0 on success.
 /// returns -1 on error.
 ///
-int fetch_dir(dir_t *dir_val, program_memory_t *mem);
+int fetch_dir(dir_t *dir_val, program_memory_t *mem, bool is_index);
 
 ///
 /// fetch a registry id from the memory and move position to the next bytes.

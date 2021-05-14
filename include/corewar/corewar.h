@@ -25,7 +25,7 @@ enum arg_type {
     (*(type *) bytes_array)
 
 #define GET_CODING_OF_ARG(coding_byte, id) \
-    ((coding_byte >> (2 * id)) & 0b11)
+    ((coding_byte >> (6 - 2 * id)) & 0b11)
 
 typedef unsigned char arg_type_t;
 
@@ -69,6 +69,31 @@ typedef struct {
 } memory_slot_t;
 
 ///
+/// the operation that will be is executed.
+///
+typedef struct runtime_op {
+    ///
+    /// the operation bytecode
+    ///
+    byte_t code;
+
+    ///
+    /// the number of bytes that the instruction takes
+    ///
+    int bytecount;
+
+    ///
+    /// the arguments passed to the instruction
+    ///
+    arg_t args[4];
+
+    ///
+    /// the number of arguments passed to the instruction
+    ///
+    int args_count;
+} runtime_op_t;
+
+///
 /// the interface between any memory access and the memory array
 ///
 typedef struct program_memory {
@@ -107,6 +132,11 @@ typedef struct program_memory {
     /// the carry value
     ///
     bool carry;
+
+    ///
+    /// Number of cycles to sleep
+    ///
+    int sleep_cycles;
 } program_memory_t;
 
 typedef struct champion {
@@ -140,31 +170,6 @@ typedef struct champion {
 
 #define IS_INVALID_REGISTER_ID(id) \
     (arg->reg_id <= 0 || arg->reg_id > REG_NUMBER)
-
-///
-/// the operation that will be is executed.
-///
-typedef struct runtime_op {
-    ///
-    /// the operation bytecode
-    ///
-    byte_t code;
-
-    ///
-    /// the number of bytes that the instruction takes
-    ///
-    int bytecount;
-
-    ///
-    /// the arguments passed to the instruction
-    ///
-    arg_t args[4];
-
-    ///
-    /// the number of arguments passed to the instruction
-    ///
-    int args_count;
-} runtime_op_t;
 
 struct operation {
     ///

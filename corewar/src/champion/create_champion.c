@@ -24,6 +24,7 @@ static int init_instance(program_memory_t *champ_inst, program_memory_t *mem,
         .owner_id = mem->owner_id
     };
 
+    my_memset(champ_inst, 0, sizeof(program_memory_t));
     my_memcpy(champ_inst, &champ_mem, sizeof(champ_mem));
     my_memset(mem->registers, 0, sizeof(mem->registers));
     return (0);
@@ -33,6 +34,7 @@ int create_champion(champion_t *champ, program_memory_t *mem)
 {
     memory_slot_t *first_instruction_pos = mem->pos;
 
+    my_memset(champ, 0, sizeof(champion_t));
     mem->owner_id++;
     champ->id = mem->owner_id;
     champ->instances_max = 10;
@@ -50,6 +52,13 @@ int create_champion_from_file(champion_t *champ, program_memory_t *mem,
 {
     if (create_champion(champ, mem) < 0)
         return (-1);
-    load_champion_from_file(champ, file);
-    return (0);
+    return (load_champion_from_file(champ, file));
+}
+
+int create_champion_from_bytes(champion_t *champ, program_memory_t *mem,
+    byte_t *bytes, int bytes_size)
+{
+    if (create_champion(champ, mem) < 0)
+        return (-1);
+    return (load_champion_from_bytes(champ, bytes, bytes_size));
 }

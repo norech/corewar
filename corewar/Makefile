@@ -43,6 +43,7 @@ SRC_DATATYPE = 	src/datatype/fetch_byte.c \
 				src/datatype/fetch_dir.c \
 				src/datatype/fetch_ind.c \
 				src/datatype/fetch_reg.c \
+				src/datatype/resolve_arg_value.c \
 
 SRC_DEBUG = 	src/debug/debug_and_pause.c \
 				src/debug/diff_memory.c \
@@ -56,11 +57,15 @@ SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
 
 SRC_PARSER =	src/parser/parse_bytecode.c \
 
-SRC_INSTRUCT = 	src/instructions/zjmp.c \
+SRC_INSTRUCT = 	src/instructions/aff.c \
+				src/instructions/fork.c \
+				src/instructions/live.c \
+				src/instructions/zjmp.c \
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \
-				src/util/move_to_champion_pos.c
+				src/util/move_to_champion_pos.c \
+				src/util/append_instance.c
 
 SRC_CHAMPION = 	src/champion/create_champion.c \
 				src/champion/load_champion_from_file.c \

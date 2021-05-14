@@ -5,6 +5,7 @@
 ** Source code
 */
 
+#include <my.h>
 #include "corewar/corewar.h"
 #include "corewar/memory.h"
 #include "corewar/util.h"
@@ -12,11 +13,12 @@
 
 program_memory_t *alloc_program_memory(void)
 {
-    program_memory_t *mem = malloc(sizeof(program_memory_t));
+    program_memory_t *mem = my_calloc(1, sizeof(program_memory_t));
 
     if (!mem)
         return (NULL);
-    init_memory(mem);
+    if (init_memory(mem) < 0)
+        return (NULL);
     return (mem);
 }
 
@@ -28,7 +30,7 @@ void free_program_memory(program_memory_t *mem)
 
 champion_t *alloc_champion(void)
 {
-    return (malloc(sizeof(champion_t)));
+    return (my_calloc(1, sizeof(champion_t)));
 }
 
 void free_champion(champion_t *champ)

@@ -18,12 +18,15 @@
 int main(int ac, char *av[])
 {
     program_memory_t mem;
-    champion_t champ[ac - 1];
+    champion_t champ[ac];
 
+    champ[ac - 1].instances = NULL;
     init_memory(&mem);
-    for (int i = 1; i < ac; i++)
+    for (int i = 1; i < ac; i++) {
         if (create_champion_from_file(&champ[i - 1], &mem, av[i]))
             return (84);
+        jump_relative_bytes(&mem, 1200);
+    }
     mem.pos = champ[0].instances[0].pos;
     while (true) {
         next_step(&mem, champ);

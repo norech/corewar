@@ -44,6 +44,9 @@ enum operations {
 #define IS_INVALID_OP(code) \
     (code == 0x00 || code > 0x10)
 
+#define CONVERT_TO_ARG_TYPE(tab_type) \
+    (tab_type & 0b111)
+
 #define MEM_SIZE                (6*1024)
 
 ///
@@ -85,6 +88,11 @@ typedef char args_type_t;
 /// into r1 (4 bytes ))
 ///
 #define T_IND           4
+
+///
+/// Index argument
+///
+#define T_IDX           8
 
 ///
 /// LABEL

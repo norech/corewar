@@ -11,8 +11,9 @@
 #include <corewar/memory.h>
 #include <corewar/op.h>
 
-bool live(runtime_op_t *op UNUSED, program_memory_t *mem)
+bool live(runtime_op_t *op UNUSED, champion_t *champ,
+    program_memory_t *instance)
 {
-    my_printf("The player %d(%s)is alive.\n", mem->owner_id, mem->prog_name);
+    my_printf("The player %d(%s)is alive.\n", instance->owner_id, champ->name);
     return (true);
 }
