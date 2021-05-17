@@ -6,6 +6,7 @@
 */
 
 #include "asm/parser.h"
+#include "my/io.h"
 
 int push_instruction(instructions_ll_t *list, instruction_t *instr)
 {

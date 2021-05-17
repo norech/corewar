@@ -16,6 +16,8 @@ int analyze_program(analyzer_t *analyzer)
     for (instruction_t *node = instr->head; node != NULL; node = node->next) {
         if (analyze_signature(analyzer, node) < 0)
             return (-1);
+        if (analyze_size(analyzer, node) < 0)
+            return (-1);
     }
     return (code);
 }

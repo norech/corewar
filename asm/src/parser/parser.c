@@ -92,7 +92,7 @@ int parse_program(parser_t *parser)
         while (consume_whitespaces(parser) != 0
             || consume_newlines(parser) != 0);
 
-        if ((code = parse_next_instruction(&instr, parser)) <= 0)
+        if ((code = parse_next_instruction(&instr, parser)) < 0)
             break;
         node = malloc(sizeof(instruction_t));
         if (node == NULL)
@@ -100,6 +100,8 @@ int parse_program(parser_t *parser)
         my_memcpy(node, &instr, sizeof(instruction_t));
         push_instruction(&parser->program.instructions, node);
         my_memset(&instr, 0, sizeof(instruction_t));
+        if (code == 0)
+            break;
     }
     return (code);
 }

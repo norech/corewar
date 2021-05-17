@@ -45,6 +45,7 @@ SRC_BYTECODE = 	src/generator/bytecode/bc_coding_byte.c \
 SRC_GENERATOR = src/generator/init_generator.c
 
 SRC_UTIL = 		src/util/write_endian.c \
+				src/util/write_endian_offset.c \
 				src/util/write_reversed.c \
 				src/util/push_instruction.c \
 				src/util/pop_instruction.c \
@@ -59,6 +60,7 @@ SRC_ANALYZER = 	src/analyzer/analyzer.c \
 				src/analyzer/analyzer_error.c \
 				src/analyzer/init_analyzer.c \
 				src/analyzer/analyzer/analyze_signature.c \
+				src/analyzer/analyzer/analyze_size.c \
 
 SRC_CONSUMERS = src/parser/consumers/consume_arg_label.c \
 				src/parser/consumers/consume_comma.c \

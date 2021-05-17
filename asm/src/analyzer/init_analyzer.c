@@ -14,5 +14,6 @@ int init_analyzer(analyzer_t *output_analyzer, parser_t *parser)
     output_analyzer->start = parser->start;
     output_analyzer->filename = parser->filename;
     output_analyzer->program = parser->program;
+    output_analyzer->header = parser->header;
     return (0);
 }

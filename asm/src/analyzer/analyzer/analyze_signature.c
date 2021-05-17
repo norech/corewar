@@ -21,6 +21,7 @@ char *get_argument_name(int i) {
             return "invalid argument";
     }
 }
+
 int analyze_signature(analyzer_t *analyzer, instruction_t *instruction)
 {
     op_t *tab_op = &OP_TAB[instruction->bytecode];

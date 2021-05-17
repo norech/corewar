@@ -8,6 +8,7 @@
 #ifndef DC348E51_57D5_4ED5_9CDF_0EBCA8AD3A30
 #define DC348E51_57D5_4ED5_9CDF_0EBCA8AD3A30
 
+#include "corewar/op.h"
 #include <corewar/corewar.h>
 
 typedef struct label {
@@ -84,6 +85,7 @@ typedef struct parser {
     char *start;
     char *pos;
     char *filename;
+    header_t *header;
     parsed_program_t program;
     parser_error_t errors[10];
 } parser_t;
@@ -92,6 +94,7 @@ typedef struct parser {
 typedef struct analyzer {
     char *start;
     char *filename;
+    header_t *header;
     parsed_program_t program;
     analyzer_error_t errors[10];
 } analyzer_t;
@@ -168,7 +171,8 @@ int consume_number(int *output_value, parser_t *parser);
 int init_parser_from_file(char *output_buffer, parser_t *output_parser,
     char *file);
 
-int init_parser(parser_t *output_parser, char *file, char *input);
+int init_parser(parser_t *output_parser, header_t *header, char *file,
+    char *input);
 
 int read_file(char *output_buffer, char *file);
 
