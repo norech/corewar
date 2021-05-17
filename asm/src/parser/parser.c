@@ -91,7 +91,6 @@ int parse_program(parser_t *parser)
     while (true) {
         while (consume_whitespaces(parser) != 0
             || consume_newlines(parser) != 0);
-
         if ((code = parse_next_instruction(&instr, parser)) < 0)
             break;
         node = malloc(sizeof(instruction_t));

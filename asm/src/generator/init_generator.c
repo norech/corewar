@@ -17,27 +17,16 @@
 int generate_argument(generator_t *generator, instruction_t *instr, int arg_id)
 {
     op_t *op_tab = &OP_TAB[instr->bytecode];
+    dir_t dir = instr->args[arg_id].dir_val;
+    ind_t ind = instr->args[arg_id].ind_val;
 
-        my_dprintf(2, "\n");
-        my_dprintf(2, "%d, %d, %d", instr->args[arg_id].dir_val, instr->args[arg_id].ind_val, instr->args[arg_id].reg_id);
-
-    if ((op_tab->type[arg_id] & T_IDX) != 0) {
-        if (instr->args[arg_id].type == ARG_DIR_NB)
-            write_endian_offset(generator->fd, &instr->args[arg_id].dir_val,
-                DIR_SIZE, IND_SIZE);
-        if (instr->args[arg_id].type == ARG_IND_NB)
-            write_endian_offset(generator->fd, &instr->args[arg_id].ind_val,
-                IND_SIZE, IND_SIZE);
-        if (instr->args[arg_id].type == ARG_REG_ID)
-            write_endian(generator->fd, &instr->args[arg_id].reg_id, 1);
-        return (0);
-    }
     if (instr->args[arg_id].type == ARG_DIR_NB)
-        write_endian(generator->fd, &instr->args[arg_id].dir_val, DIR_SIZE);
+        write_endian_offset(generator->fd, &dir, DIR_SIZE,
+            (op_tab->type[arg_id] & T_IDX) == 0 ? DIR_SIZE : IND_SIZE);
     if (instr->args[arg_id].type == ARG_IND_NB)
-        write_endian(generator->fd, &instr->args[arg_id].ind_val, IND_SIZE);
+        write_endian(generator->fd, &ind, IND_SIZE);
     if (instr->args[arg_id].type == ARG_REG_ID)
-        write_endian(generator->fd, &instr->args[arg_id].reg_id, 1);
+        write(generator->fd, &instr->args[arg_id].reg_id, 1);
     return (0);
 }
 
