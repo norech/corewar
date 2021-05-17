@@ -34,6 +34,8 @@ typedef struct instruction {
     byte_t bytecode;
     arg_t args[4];
     char *label;
+    byte_t byte_count;
+    int args_count;
 } instruction_t;
 
 typedef struct instructions_ll {
@@ -56,11 +58,27 @@ enum parser_error_code {
     ALLOC_FAILED
 };
 
+enum analyzer_error_code {
+    NO_ANALYZER_ERROR,
+    INVALID_ARG_COUNT,
+    INVALID_ARG_TYPE
+};
+
 typedef struct parser_error {
     char *pos;
     enum parser_error_code code;
     char *message;
 } parser_error_t;
+
+typedef struct analyzer_error {
+    bool is_instr;
+    union {
+        instruction_t *instr;
+        label_t *label;
+    };
+    enum analyzer_error_code code;
+    char *message;
+} analyzer_error_t;
 
 typedef struct parser {
     char *start;
@@ -70,6 +88,14 @@ typedef struct parser {
     parser_error_t errors[10];
 } parser_t;
 
+
+typedef struct analyzer {
+    char *start;
+    char *filename;
+    parsed_program_t program;
+    analyzer_error_t errors[10];
+} analyzer_t;
+
 int parse_program(parser_t *parser);
 
 ///
@@ -77,6 +103,13 @@ int parse_program(parser_t *parser);
 /// Returns a negative number (subzero).
 ///
 int parser_error(parser_t *parser, enum parser_error_code code, char *message);
+
+///
+/// Add an error to the parser error stack at the specified instruction.
+/// Returns a negative number (subzero).
+///
+int analyzer_error(analyzer_t *analyzer, instruction_t *instruction,
+    enum analyzer_error_code code, char *message);
 
 ///
 /// If one or more space/tab is found in current position, consume it.
@@ -138,5 +171,7 @@ int init_parser_from_file(char *output_buffer, parser_t *output_parser,
 int init_parser(parser_t *output_parser, char *file, char *input);
 
 int read_file(char *output_buffer, char *file);
+
+int init_analyzer(analyzer_t *output_analyzer, parser_t *parser);
 
 #endif /* DC348E51_57D5_4ED5_9CDF_0EBCA8AD3A30 */

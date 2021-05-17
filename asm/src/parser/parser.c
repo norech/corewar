@@ -27,7 +27,8 @@ static void fill_argument_body(arg_t *output_arg, char prefix, int number)
     }
 }
 
-int parse_next_argument(arg_t *output_arg, parser_t *parser)
+int parse_next_argument(arg_t *output_arg, instruction_t *instr,
+    parser_t *parser)
 {
     int number;
     char *label;
@@ -44,32 +45,33 @@ int parse_next_argument(arg_t *output_arg, parser_t *parser)
         output_arg->label = my_strndup(label, number);
         if (output_arg->label == NULL)
             return (parser_error(parser, ALLOC_FAILED, NULL));
+        fill_argument_body(output_arg, prefix, number);
     }
+    instr->args_count++;
     consume_whitespaces(parser);
     return (0);
 }
 
 
-int parse_next_label(instruction_t *output_instr UNUSED, parser_t *parser
+int parse_next_label(instruction_t *out_instr UNUSED, parser_t *parser
     UNUSED)
 {
     return (0);
 }
 
-int parse_next_instruction(instruction_t *output_instr, parser_t *parser)
+int parse_next_instruction(instruction_t *out_instr, parser_t *parser)
 {
-    byte_t opcode;
     bool end_with_comma = true;
 
     consume_whitespaces(parser);
-    if ((opcode = consume_instruction_mnemo(parser)) == 0)
+    if ((out_instr->bytecode = consume_instruction_mnemo(parser)) == 0)
         return (parser_error(parser, EXPECT_TOKEN, "mnemonic"));
     if (consume_whitespaces(parser) == 0)
         return (parser_error(parser, EXPECT_TOKEN, "space"));
     for (int i = 0; i < MAX_ARGS_NUMBER && end_with_comma; i++) {
-        if (parse_next_argument(&output_instr->args[i], parser) < 0)
+        my_memset(&out_instr->args[i], 0, sizeof(arg_t));
+        if (parse_next_argument(&out_instr->args[i], out_instr, parser) < 0)
             return (parser_error(parser, EXPECT_TOKEN, "argument"));
-        my_memset(&output_instr->args[i], 0, sizeof(arg_t));
         if (consume_comma(parser) == 0)
             end_with_comma = false;
     }
@@ -89,6 +91,7 @@ int parse_program(parser_t *parser)
     while (true) {
         while (consume_whitespaces(parser) != 0
             || consume_newlines(parser) != 0);
+
         if ((code = parse_next_instruction(&instr, parser)) <= 0)
             break;
         node = malloc(sizeof(instruction_t));

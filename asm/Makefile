@@ -55,6 +55,11 @@ SRC_PARSER = 	src/parser/parser.c \
 				src/parser/read_file.c \
 				src/parser/init_parser.c
 
+SRC_ANALYZER = 	src/analyzer/analyzer.c \
+				src/analyzer/analyzer_error.c \
+				src/analyzer/init_analyzer.c \
+				src/analyzer/analyzer/analyze_signature.c \
+
 SRC_CONSUMERS = src/parser/consumers/consume_arg_label.c \
 				src/parser/consumers/consume_comma.c \
 				src/parser/consumers/consume_instruction_mnemo.c \
@@ -71,6 +76,7 @@ SRC =	$(SRC_BYTECODE) \
 		$(SRC_CONSUMERS) \
 		$(SRC_GENERATOR) \
 		$(SRC_COMPILER) \
+		$(SRC_ANALYZER) \
 		../corewar/src/op.c
 
 TESTS =	\

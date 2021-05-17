@@ -7,6 +7,7 @@
 
 #include <my/str.h>
 #include "corewar/corewar.h"
+#include "corewar/op.h"
 #include <asm/parser.h>
 
 int parser_error(parser_t *parser, enum parser_error_code code, char *message)

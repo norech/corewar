@@ -12,6 +12,7 @@
 
 int compile_string(int output_fd, char *input_filename, char *input);
 
-void show_errors(parser_t *parser);
+void show_parser_errors(parser_t *parser);
+void show_analyzer_errors(analyzer_t *analyzer);
 
 #endif /* BD331797_E578_48F6_856C_7064ADE4D16B */

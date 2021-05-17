@@ -65,8 +65,10 @@ static int next_instance_step(program_memory_t *mem UNUSED,
 
 int next_step(program_memory_t *mem, champion_t *champions UNUSED)
 {
+    int instances_count;
     for (int i = 0; champions[i].instances != NULL; i++) {
-        for (int j = 0; j < champions[i].instances_count; j++) {
+        instances_count = champions[i].instances_count;
+        for (int j = 0; j < instances_count; j++) {
             next_instance_step(mem, &champions[i], j);
         }
     }

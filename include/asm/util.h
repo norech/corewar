@@ -20,6 +20,9 @@ int write_reversed(int fd, void *data, size_t size);
 
 int write_endian(int fd, void *data, size_t size);
 
-int get_line_num(int *output_char_pos, parser_t *parser, char *curr_ptr);
+int get_line_num_parser(int *output_char_pos, parser_t *parser, char *curr_ptr);
+
+int get_line_num_analyzer(int *output_char_pos, analyzer_t *analyzer,
+    analyzer_error_t *error);
 
 #endif /* C4E5875A_EBCA_4383_B042_BC56B75C356B */
