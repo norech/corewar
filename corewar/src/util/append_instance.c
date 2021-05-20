@@ -1,3 +1,9 @@
+/*
+** EPITECH PROJECT, 2021
+** append_instance
+** File description:
+** Source code
+*/
 
 #include <my.h>
 #include "corewar/corewar.h"

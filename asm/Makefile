@@ -42,7 +42,8 @@ TARGET_TEST = unit_tests
 SRC_BYTECODE = 	src/generator/bytecode/bc_coding_byte.c \
 				src/generator/bytecode/bc_zjmp.c \
 
-SRC_GENERATOR = src/generator/init_generator.c
+SRC_GENERATOR = src/generator/init_generator.c \
+				src/generator/generate_code.c \
 
 SRC_UTIL = 		src/util/write_endian.c \
 				src/util/write_endian_offset.c \

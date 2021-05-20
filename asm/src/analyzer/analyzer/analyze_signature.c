@@ -7,7 +7,8 @@
 
 #include "asm/parser.h"
 
-char *get_argument_name(int i) {
+char *get_argument_name(int i)
+{
     switch (i) {
         case 0:
             return "first argument";

@@ -39,7 +39,7 @@ enum operations {
 
 #define HAS_CODING_BYTE(code) \
     (code != OP_LIVE && code != OP_ZJMP \
-     && code != OP_FORK && code != OP_LFORK)
+        && code != OP_FORK && code != OP_LFORK)
 
 #define IS_INVALID_OP(code) \
     (code == 0x00 || code > 0x10)
