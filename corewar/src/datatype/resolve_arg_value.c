@@ -8,6 +8,7 @@
 #include "corewar/op.h"
 #include <corewar/corewar.h>
 #include <corewar/memory.h>
+#include <stdio.h>
 
 reg_data_t resolve_arg_value(arg_t *arg, program_memory_t *mem)
 {
@@ -24,5 +25,15 @@ reg_data_t resolve_arg_value(arg_t *arg, program_memory_t *mem)
         && arg->reg_id != 0 && arg->reg_id <= REG_NUMBER) {
         output = mem->registers[arg->reg_id - 1];
     }
+    printf("%d\n", arg->dir_val);
     return (output);
+}
+
+short resolve_arg_index_value(arg_t *arg, program_memory_t *mem)
+{
+    ind_t index = 0;
+    reg_data_t data = resolve_arg_value(arg, mem);
+
+    index = (short)data % IDX_MOD;
+    return (index);
 }

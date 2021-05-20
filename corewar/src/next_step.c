@@ -27,8 +27,10 @@ static int execute_op(champion_t *champion, program_memory_t *instance)
 {
     runtime_op_t op;
 
-    if (!parse_bytecode(&op, instance))
+    if (!parse_bytecode(&op, instance)) {
+        debug_and_pause(&op, instance);
         return (-1);
+    }
     debug_and_pause(&op, instance);
     for (int i = 0; INSTRUCTIONS[i].opcode != 0; i++) {
         if (INSTRUCTIONS[i].opcode != op.code)
@@ -42,8 +44,10 @@ static int schedule_op(program_memory_t *instance)
 {
     byte_t op = instance->pos->data;
 
-    if (IS_INVALID_OP(op))
+    if (IS_INVALID_OP(op)) {
+        instance->sleep_cycles = 1;
         return (-1);
+    }
     instance->sleep_cycles = OP_TAB[op].cycles_count;
     return (0);
 }
@@ -53,7 +57,7 @@ static int next_instance_step(program_memory_t *mem UNUSED,
 {
     program_memory_t *instance = &champion->instances[instance_id];
 
-    if (instance->sleep_cycles != 0) {
+    if (instance->sleep_cycles > 0) {
         instance->sleep_cycles--;
         return (0);
     }
