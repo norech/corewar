@@ -16,4 +16,8 @@ fclean: clean
 	$(MAKE) -C ./asm fclean
 	$(MAKE) -C ./corewar fclean
 
+tests_run:
+	$(MAKE) -C ./asm tests_run
+	$(MAKE) -C ./corewar tests_run
+
 re: fclean all

@@ -97,7 +97,7 @@ build_lib:
 build_all: ${OBJ}
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(LFLAGS)
 
-tests_run: clean_tests build_lib
+tests_run: clean_tests build_lib ${OBJ_TESTS}
 	$(CC) $(CFLAGS) $(TEST_FLAGS) -o $(TARGET_TEST) $(OBJ_TESTS) $(LFLAGS)
 	./$(TARGET_TEST) --verbose
 
