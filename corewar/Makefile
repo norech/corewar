@@ -86,16 +86,21 @@ TESTS =	../tests/corewar/copy_relative_bytes.c \
 		../tests/corewar/write_relative_bytes.c \
 		../tests/corewar/fetch_byte.c \
 
-all: build_lib build_all
+OBJ_TESTS = $(SRC:.c=.o) $(TESTS:.c=.o)
+
+OBJ = $(SRC:.c=.o) src/main.o
+
+all: build_lib
+	${MAKE} -j build_all -C .
 
 build_lib:
-	$(LIB_MODULES) $(MAKE) -C ../lib/my/
+	$(LIB_MODULES) $(MAKE) -j -C ../lib/my/
 
-build_all: $(SRC)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRC) src/main.c $(LFLAGS)
+build_all: $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(LFLAGS)
 
 tests_run: clean_tests build_lib
-	$(CC) $(CFLAGS) $(TEST_FLAGS) -o $(TARGET_TEST) $(SRC) $(TESTS) $(LFLAGS)
+	$(CC) $(CFLAGS) $(TEST_FLAGS) -o $(TARGET_TEST) $(OBJ_TESTS) $(LFLAGS)
 	./$(TARGET_TEST) --verbose
 
 coverage:
@@ -112,6 +117,7 @@ clean:
 
 fclean: clean
 	$(MAKE) -C ../lib/my/ fclean
+	rm -f $(OBJ)
 	rm -f *.gc* unit_tests
 
 re: fclean all
