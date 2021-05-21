@@ -10,8 +10,10 @@
 #include "asm/analyzer.h"
 #include "asm/generator.h"
 #include "corewar/op.h"
+#include "corewar/util.h"
 #include <asm/compiler.h>
 #include <unistd.h>
+#include <stdio.h>
 
 int get_program_size(analyzer_t *analyzer)
 {
