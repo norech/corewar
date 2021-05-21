@@ -51,6 +51,9 @@ static void show_analyzer_error(analyzer_t *parser, analyzer_error_t *error)
         case INVALID_ARG_TYPE:
             my_dprintf(2, "Invalid arg type for %s.\n", error->message);
             break;
+        case INVALID_REG_VALUE:
+            my_dprintf(2, "Invalid reg value. Value should be 1>$value<10\n");
+            break;
         default:
         case NO_ANALYZER_ERROR:
             break;

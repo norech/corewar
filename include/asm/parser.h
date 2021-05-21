@@ -62,7 +62,8 @@ enum parser_error_code {
 enum analyzer_error_code {
     NO_ANALYZER_ERROR,
     INVALID_ARG_COUNT,
-    INVALID_ARG_TYPE
+    INVALID_ARG_TYPE,
+    INVALID_REG_VALUE
 };
 
 typedef struct parser_error {
