@@ -64,7 +64,9 @@ enum parser_error_code {
 enum analyzer_error_code {
     NO_ANALYZER_ERROR,
     INVALID_ARG_COUNT,
-    INVALID_ARG_TYPE
+    INVALID_ARG_TYPE,
+    INVALID_REG_VALUE,
+    INVALID_TARGET_LABEL
 };
 
 typedef struct parser_error {
@@ -183,6 +185,11 @@ int init_parser(parser_t *output_parser, header_t *header, char *file,
 int read_file(char *output_buffer, char *file);
 
 int init_analyzer(analyzer_t *output_analyzer, parser_t *parser);
+
+int parse_next_argument(arg_t *output_arg, instruction_t *instr,
+    parser_t *parser);
+
+int parse_labels(label_t **output_labels, parser_t *parser);
 
 typedef struct error_parser {
     enum parser_error_code error_code;

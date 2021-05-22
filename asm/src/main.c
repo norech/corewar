@@ -17,7 +17,7 @@
 int main(int ac UNUSED, char *av[] UNUSED)
 {
     char buffer[16384];
-    int output_fd = open(av[2], O_WRONLY, 0644);
+    int output_fd = open(av[2], O_WRONLY | O_CREAT, 0644);
 
     if (read_file(buffer, av[1]) < 0) {
         my_dprintf(2, "Can't read file.\n");
