@@ -22,6 +22,7 @@ static const struct instruction_map INSTRUCTIONS[] = {
     { OP_AFF, aff },
     { OP_AND, and},
     { OP_ADD, add},
+    { OP_SUB, sub},
     { 0, NULL }
 };
 
