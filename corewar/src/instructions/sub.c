@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** B-CPE-201-RUN-2-1-corewar-alexis.cheron
 ** File description:
-** add
+** sub
 */
 
 #include <my.h>
@@ -17,7 +17,7 @@ bool add(runtime_op_t *op UNUSED, champion_t *champ UNUSED,
 {
     instance->registers[op->args[2].reg_id - 1] =
         instance->registers[op->args[0].reg_id - 1]
-            + instance->registers[op->args[1].reg_id - 1];
+            - instance->registers[op->args[1].reg_id - 1];
     if (instance->registers[op->args[2].reg_id - 1] == 0)
         instance->carry = 1;
     else
