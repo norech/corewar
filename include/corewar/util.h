@@ -24,4 +24,6 @@ void free_runtime_op(runtime_op_t *op);
 
 int append_instance(champion_t *champ, program_memory_t *instance);
 
+int swap_header(header_t *header);
+
 #endif /* D7E5D541_192D_4F43_B332_01BACAEF35CE */

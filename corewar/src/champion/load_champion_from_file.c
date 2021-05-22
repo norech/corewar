@@ -9,6 +9,7 @@
 #include "corewar/op.h"
 #include <corewar/corewar.h>
 #include <corewar/memory.h>
+#include <corewar/util.h>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -24,6 +25,7 @@ int load_champion_from_file(champion_t *champ, char *file)
         return (-1);
     if (!read(fd, &header, sizeof(header_t)))
         return (-1);
+    swap_header(&header);
     my_memcpy(champ->name, header.prog_name, sizeof(champ->name));
     while ((len = read(fd, buff, 1024)) != 0) {
         if (len == -1)
@@ -31,5 +33,6 @@ int load_champion_from_file(champion_t *champ, char *file)
         write_relative_bytes(&champ->instances[0], buff, len);
     }
     champ->instances[0].pos = pos;
+    close(fd);
     return (0);
 }
