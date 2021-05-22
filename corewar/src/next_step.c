@@ -76,6 +76,11 @@ int next_step(vm_t *vm)
 {
     int instances_count;
     for (int i = 0; vm->champions[i].instances != NULL; i++) {
+        if (vm->champions[i].cycles_since_last_live >= vm->cycles_to_die)
+            vm->champions[i].is_dead = true;
+        if (vm->champions[i].is_dead)
+            continue;
+        vm->champions[i].cycles_since_last_live++;
         instances_count = vm->champions[i].instances_count;
         for (int j = 0; j < instances_count; j++) {
             next_instance_step(vm, i, j);

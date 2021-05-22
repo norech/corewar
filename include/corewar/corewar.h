@@ -166,11 +166,17 @@ typedef struct champion {
     /// Number of instances that can be created before overflow
     ///
     int instances_max;
+
+    int cycles_since_last_live;
+
+    bool is_dead;
 } champion_t;
 
 typedef struct vm {
     champion_t *champions;
     int champions_count;
+    int live_calls;
+    int cycles_to_die;
     program_memory_t memory;
 } vm_t;
 

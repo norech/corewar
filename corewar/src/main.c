@@ -17,8 +17,9 @@
 
 int main(int ac, char *av[])
 {
-    vm_t vm;
+    vm_t vm = {0};
 
+    vm.cycles_to_die = CYCLE_TO_DIE;
     vm.champions = malloc(sizeof(champion_t) * ac);
     if (vm.champions == NULL)
         return (84);

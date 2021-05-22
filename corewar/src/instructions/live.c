@@ -22,5 +22,11 @@ bool live(runtime_op_t *op UNUSED, vm_t *vm,
         return (true);
     champ = &vm->champions[champion_id - 1];
     my_printf("The player %d(%s)is alive.\n", champion_id, champ->name);
+    champ->cycles_since_last_live = 0;
+    vm->live_calls++;
+    if (vm->live_calls >= NBR_LIVE) {
+        vm->live_calls = 0;
+        vm->cycles_to_die -= CYCLE_DELTA;
+    }
     return (true);
 }
