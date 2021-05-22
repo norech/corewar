@@ -20,6 +20,8 @@ static const struct instruction_map INSTRUCTIONS[] = {
     { OP_ZJMP, zjmp },
     { OP_FORK, fork_op },
     { OP_AFF, aff },
+    { OP_AND, and},
+    { OP_ADD, add},
     { 0, NULL }
 };
 
