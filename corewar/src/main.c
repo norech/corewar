@@ -35,6 +35,7 @@ int main(int ac, char *av[])
         if (next_step(&vm) == 1)
             break;
     }
+    dump_memory(&vm.memory);
     destroy_memory(&vm.memory);
     free(vm.champions);
 }

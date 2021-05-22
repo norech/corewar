@@ -11,7 +11,7 @@
 #include <corewar/corewar.h>
 
 void debug_and_pause(runtime_op_t *op, program_memory_t *mem);
-void dump_memory(unsigned char *bytes, size_t len);
+void dump_memory(program_memory_t *mem);
 void diff_memory(unsigned char *old, unsigned char *new, size_t len);
 void debug_memory(runtime_op_t *op, program_memory_t *mem);
 void print_op(runtime_op_t *op);
