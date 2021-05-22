@@ -57,7 +57,8 @@ enum parser_error_code {
     EXPECT_TOKEN,
     INVALID_TOKEN,
     ALLOC_FAILED,
-    MULT
+    MULT,
+    LONG
 };
 
 enum analyzer_error_code {
@@ -169,6 +170,7 @@ int consume_number(int *output_value, parser_t *parser);
 int consume_name(parser_t *parser);
 int get_prog_name(parser_t *parser);
 int consume_comment(parser_t *parser);
+
 ///
 /// Read the input file, then fill the output buffer and the output parser.
 ///
@@ -181,5 +183,10 @@ int init_parser(parser_t *output_parser, header_t *header, char *file,
 int read_file(char *output_buffer, char *file);
 
 int init_analyzer(analyzer_t *output_analyzer, parser_t *parser);
+
+typedef struct error_parser {
+    enum parser_error_code error_code;
+    char *format;
+} error_parser_t;
 
 #endif /* DC348E51_57D5_4ED5_9CDF_0EBCA8AD3A30 */
