@@ -51,8 +51,10 @@ int main(int ac UNUSED, char *av[] UNUSED)
         my_dprintf(2, "Can't read file.\n");
         return (84);
     }
-    close(output_fd);
-    if (compile_string(output_fd, av[1], buffer) < 0)
+    if (compile_string(output_fd, av[1], buffer) < 0) {
+        close(output_fd);
         return (84);
+    }
+    close(output_fd);
     return (0);
 }
