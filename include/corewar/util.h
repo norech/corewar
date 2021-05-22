@@ -9,6 +9,7 @@
 #define D7E5D541_192D_4F43_B332_01BACAEF35CE
 
 #include "corewar/corewar.h"
+#include <asm/compiler.h>
 
 int init_memory(program_memory_t *mem);
 void destroy_memory(program_memory_t *mem);

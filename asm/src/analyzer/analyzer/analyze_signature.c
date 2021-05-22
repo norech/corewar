@@ -6,6 +6,7 @@
 */
 
 #include "asm/parser.h"
+#include "corewar/corewar.h"
 
 char *get_argument_name(int i)
 {
@@ -23,6 +24,15 @@ char *get_argument_name(int i)
     }
 }
 
+int check_register(instruction_t *instruction, int i)
+{
+    if (instruction->args[i].type == ARG_REG_ID) {
+        if (IS_INVALID_REGISTER_ID(instruction->args[i].reg_id))
+            return -1;
+    }
+    return 0;
+}
+
 int analyze_signature(analyzer_t *analyzer, instruction_t *instruction)
 {
     op_t *tab_op = &OP_TAB[instruction->bytecode];
@@ -33,6 +43,9 @@ int analyze_signature(analyzer_t *analyzer, instruction_t *instruction)
         if ((instruction->args[i].type & tab_op->type[i]) == 0)
             return (analyzer_error(analyzer, instruction, INVALID_ARG_TYPE,
                 get_argument_name(i)));
+        if (check_register(instruction, i) != 0)
+            return (analyzer_error(analyzer, instruction, INVALID_REG_VALUE,
+                                                                        NULL));
     }
     return (0);
 }

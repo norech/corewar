@@ -14,6 +14,7 @@ int init_parser(parser_t *output_parser, header_t *header, char *file,
 {
     my_memset(output_parser, 0, sizeof(parser_t));
     my_memset(header, 0, sizeof(header_t));
+    header->magic = COREWAR_EXEC_MAGIC;
     output_parser->header = header;
     output_parser->filename = file;
     output_parser->pos = input;

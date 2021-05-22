@@ -28,4 +28,7 @@ int get_line_num_parser(int *output_char_pos, parser_t *parser, char *curr_ptr);
 int get_line_num_analyzer(int *output_char_pos, analyzer_t *analyzer,
     analyzer_error_t *error);
 
+ssize_t distance_between_instructions(instruction_t *ins_1,
+                                    instruction_t *ins_2);
+
 #endif /* C4E5875A_EBCA_4383_B042_BC56B75C356B */

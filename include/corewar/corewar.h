@@ -169,7 +169,7 @@ typedef struct champion {
 } champion_t;
 
 #define IS_INVALID_REGISTER_ID(id) \
-    (arg->reg_id <= 0 || arg->reg_id > REG_NUMBER)
+    (id <= 0 || id > REG_NUMBER)
 
 struct operation {
     ///
