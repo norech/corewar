@@ -8,6 +8,7 @@
 #include <my/str.h>
 #include <my/io.h>
 #include "asm/parser.h"
+#include "asm/util.h"
 #include "corewar/corewar.h"
 #include "corewar/op.h"
 
@@ -44,12 +45,14 @@ int analyze_arg_labels(analyzer_t *analyzer, instruction_t *instruction)
             return (analyzer_error(analyzer, instruction,
                 INVALID_TARGET_LABEL, instruction->args[i].label));
         if (instruction->args[i].type == ARG_DIR_NB)
-            instruction->args[i].dir_val = 100000000;
+            instruction->args[i].dir_val
+                = distance_between_instructions(instruction, target);
         if (instruction->args[i].type == ARG_IND_NB)
-            instruction->args[i].ind_val = 10000;
+            instruction->args[i].ind_val
+                = distance_between_instructions(instruction, target);
         if (instruction->args[i].type == ARG_REG_ID)
             return (analyzer_error(analyzer, instruction,
-                INVALID_TARGET_LABEL, instruction->args[i].label));
+                INVALID_REG_VALUE, "label"));
     }
     return (0);
 }
