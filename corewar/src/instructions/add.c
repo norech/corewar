@@ -12,7 +12,7 @@
 #include <corewar/memory.h>
 #include <corewar/op.h>
 
-bool add(runtime_op_t *op UNUSED, champion_t *champ UNUSED,
+bool add(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
     program_memory_t *instance)
 {
     instance->registers[op->args[2].reg_id - 1] =

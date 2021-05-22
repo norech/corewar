@@ -28,7 +28,7 @@ static const struct instruction_map INSTRUCTIONS[] = {
     { 0, NULL }
 };
 
-static int execute_op(champion_t *champion, program_memory_t *instance)
+static int execute_op(vm_t *vm, program_memory_t *instance)
 {
     runtime_op_t op;
 
@@ -40,7 +40,7 @@ static int execute_op(champion_t *champion, program_memory_t *instance)
     for (int i = 0; INSTRUCTIONS[i].opcode != 0; i++) {
         if (INSTRUCTIONS[i].opcode != op.code)
             continue;
-        return (INSTRUCTIONS[i].execute(&op, champion, instance));
+        return (INSTRUCTIONS[i].execute(&op, vm, instance));
     }
     return (-1);
 }
@@ -57,28 +57,28 @@ static int schedule_op(program_memory_t *instance)
     return (0);
 }
 
-static int next_instance_step(program_memory_t *mem UNUSED,
-    champion_t *champion, int instance_id)
+static int next_instance_step(vm_t *vm, int champion_id, int instance_id)
 {
+    champion_t *champion = &vm->champions[champion_id];
     program_memory_t *instance = &champion->instances[instance_id];
 
     if (instance->sleep_cycles > 0) {
         instance->sleep_cycles--;
         return (0);
     }
-    execute_op(champion, instance);
+    execute_op(vm, instance);
     instance = &champion->instances[instance_id];
     schedule_op(instance);
     return (0);
 }
 
-int next_step(program_memory_t *mem, champion_t *champions UNUSED)
+int next_step(vm_t *vm)
 {
     int instances_count;
-    for (int i = 0; champions[i].instances != NULL; i++) {
-        instances_count = champions[i].instances_count;
+    for (int i = 0; vm->champions[i].instances != NULL; i++) {
+        instances_count = vm->champions[i].instances_count;
         for (int j = 0; j < instances_count; j++) {
-            next_instance_step(mem, &champions[i], j);
+            next_instance_step(vm, i, j);
         }
     }
     return (0);

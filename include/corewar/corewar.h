@@ -168,6 +168,12 @@ typedef struct champion {
     int instances_max;
 } champion_t;
 
+typedef struct vm {
+    champion_t *champions;
+    int champions_count;
+    program_memory_t memory;
+} vm_t;
+
 #define IS_INVALID_REGISTER_ID(id) \
     (id <= 0 || id > REG_NUMBER)
 
@@ -197,7 +203,7 @@ static inline bool is_arg_type_valid(byte_t opcode, int arg_index,
     return ((OP_TAB[opcode].type[arg_index] & arg_type) != 0);
 }
 
-int next_step(program_memory_t *mem, champion_t *champions);
+int next_step(vm_t *vm);
 
 #define COUNTOF(arr) (sizeof(arr) / sizeof(*arr))
 
