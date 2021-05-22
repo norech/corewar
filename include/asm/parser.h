@@ -56,7 +56,8 @@ enum parser_error_code {
     NO_ERROR,
     EXPECT_TOKEN,
     INVALID_TOKEN,
-    ALLOC_FAILED
+    ALLOC_FAILED,
+    MULT
 };
 
 enum analyzer_error_code {
@@ -165,6 +166,9 @@ int consume_label(char **output_label, parser_t *parser);
 ///
 int consume_number(int *output_value, parser_t *parser);
 
+int consume_name(parser_t *parser);
+int get_prog_name(parser_t *parser);
+int consume_comment(parser_t *parser);
 ///
 /// Read the input file, then fill the output buffer and the output parser.
 ///

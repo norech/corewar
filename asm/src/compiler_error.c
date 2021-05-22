@@ -30,6 +30,9 @@ static void show_parser_error(parser_t *parser, parser_error_t *error)
         case INVALID_TOKEN:
             my_dprintf(2, "Invalid token: %s\n", error->message);
             break;
+        case MULT:
+            my_dprintf(2, "Multiple definition of %s\n", error->message);
+            break;
         default:
         case NO_ERROR:
             break;
