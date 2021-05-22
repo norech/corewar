@@ -63,7 +63,8 @@ enum analyzer_error_code {
     NO_ANALYZER_ERROR,
     INVALID_ARG_COUNT,
     INVALID_ARG_TYPE,
-    INVALID_REG_VALUE
+    INVALID_REG_VALUE,
+    INVALID_TARGET_LABEL
 };
 
 typedef struct parser_error {
