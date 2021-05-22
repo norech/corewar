@@ -51,6 +51,9 @@ static void show_analyzer_error(analyzer_t *parser, analyzer_error_t *error)
         case INVALID_ARG_TYPE:
             my_dprintf(2, "Invalid arg type for %s.\n", error->message);
             break;
+        case INVALID_TARGET_LABEL:
+            my_dprintf(2, "Invalid target label: %s.\n", error->message);
+            break;
         default:
         case NO_ANALYZER_ERROR:
             break;

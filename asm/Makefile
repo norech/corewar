@@ -60,6 +60,7 @@ SRC_PARSER = 	src/parser/parser.c \
 SRC_ANALYZER = 	src/analyzer/analyzer.c \
 				src/analyzer/analyzer_error.c \
 				src/analyzer/init_analyzer.c \
+				src/analyzer/analyzer/analyze_labels.c \
 				src/analyzer/analyzer/analyze_signature.c \
 				src/analyzer/analyzer/analyze_size.c \
 
@@ -68,7 +69,8 @@ SRC_CONSUMERS = src/parser/consumers/consume_arg_label.c \
 				src/parser/consumers/consume_instruction_mnemo.c \
 				src/parser/consumers/consume_newlines.c \
 				src/parser/consumers/consume_number.c \
-				src/parser/consumers/consume_whitespaces.c
+				src/parser/consumers/consume_whitespaces.c \
+				src/parser/consumers/consume_label.c \
 
 SRC_COMPILER =	src/compiler.c \
 				src/compiler_error.c
