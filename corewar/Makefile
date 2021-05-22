@@ -64,12 +64,14 @@ SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/and.c	\
 				src/instructions/add.c	\
 				src/instructions/or.c	\
-				src/instructions/xor.c
+				src/instructions/xor.c  \
+				src/instructions/sub.c
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \
 				src/util/move_to_champion_pos.c \
-				src/util/append_instance.c
+				src/util/append_instance.c \
+				src/util/swap_header.c \
 
 SRC_CHAMPION = 	src/champion/create_champion.c \
 				src/champion/load_champion_from_file.c \

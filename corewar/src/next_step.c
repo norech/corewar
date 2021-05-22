@@ -24,6 +24,7 @@ static const struct instruction_map INSTRUCTIONS[] = {
     { OP_ADD, add},
     { OP_XOR, xor},
     { OP_OR, or},
+    { OP_SUB, sub},
     { 0, NULL }
 };
 

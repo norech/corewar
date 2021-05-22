@@ -68,6 +68,7 @@ int generate_instructions(generator_t *generator)
 
 int generate_code(generator_t *generator)
 {
+    swap_header(generator->header);
     write(generator->fd, generator->header, sizeof(header_t));
     generate_instructions(generator);
     return (0);
