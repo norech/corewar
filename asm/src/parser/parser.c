@@ -59,10 +59,22 @@ int link_instructions(instruction_t *target, labels_ll_t *labels,
     return (0);
 }
 
+int append_instruction(instruction_t *instr, label_t *labels, parser_t *parser)
+{
+    instruction_t *node = malloc(sizeof(instruction_t));
+
+    if (node == NULL)
+        return (parser_error(parser, ALLOC_FAILED, NULL));
+    my_memcpy(node, instr, sizeof(instruction_t));
+    link_instructions(node, &parser->program.labels, labels);
+    push_instruction(&parser->program.instructions, node);
+    my_memset(instr, 0, sizeof(instruction_t));
+    return (0);
+}
+
 int parse_program(parser_t *parser)
 {
     instruction_t instr = {0};
-    instruction_t *node;
     label_t *labels;
     int code = 0;
 
@@ -75,13 +87,8 @@ int parse_program(parser_t *parser)
             break;
         if ((code = parse_next_instruction(&instr, parser)) < 0)
             break;
-        node = malloc(sizeof(instruction_t));
-        if (node == NULL)
-            return (parser_error(parser, ALLOC_FAILED, NULL));
-        my_memcpy(node, &instr, sizeof(instruction_t));
-        link_instructions(node, &parser->program.labels, labels);
-        push_instruction(&parser->program.instructions, node);
-        my_memset(&instr, 0, sizeof(instruction_t));
+        if (append_instruction(&instr, labels, parser) < 0)
+            return (-1);
         if (code == 0)
             break;
     }
