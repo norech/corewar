@@ -1,5 +1,4 @@
 
-and %8, %8, r1
 and %4, %4, r2
-add r1, r2, r3
+sub r2, r1, r3
 zjmp %248
