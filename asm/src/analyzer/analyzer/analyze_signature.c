@@ -6,6 +6,7 @@
 */
 
 #include "asm/parser.h"
+#include "corewar/corewar.h"
 
 char *get_argument_name(int i)
 {
@@ -26,9 +27,8 @@ char *get_argument_name(int i)
 int check_register(instruction_t *instruction, int i)
 {
     if (instruction->args[i].type == ARG_REG_ID) {
-        if (instruction->args[i].reg_id < 1 ||
-            instruction->args[i].reg_id > 10)
-        return -1;
+        if (IS_INVALID_REGISTER_ID(instruction->args[i].reg_id))
+            return -1;
     }
     return 0;
 }
