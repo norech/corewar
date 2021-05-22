@@ -17,15 +17,15 @@ static void print_arg(arg_t *arg)
         case ARG_REG_ID:
             if (IS_INVALID_REGISTER_ID(arg->reg_id))
                 my_printf("\x1b[31m");
-            my_printf("r%x", arg->reg_id);
+            my_printf("r%d", arg->reg_id);
             if (IS_INVALID_REGISTER_ID(arg->reg_id))
                 my_printf("\x1b[0m");
             break;
         case ARG_DIR_NB:
-            my_printf("%c%d", '%', arg->dir_val);
+            my_printf("%c%hd", '%', (short)arg->dir_val);
             break;
         case ARG_IND_NB:
-            my_printf("%hd", arg->ind_val);
+            my_printf("%d", arg->ind_val);
             break;
     }
 }
