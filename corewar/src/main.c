@@ -32,7 +32,8 @@ int main(int ac, char *av[])
         jump_relative_bytes(&vm.memory, 1200);
     }
     while (true) {
-        next_step(&vm);
+        if (next_step(&vm) == 1)
+            break;
     }
     destroy_memory(&vm.memory);
     free(vm.champions);
