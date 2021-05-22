@@ -1,5 +1,4 @@
 
-and %8, %8, r1
-and %4, %4, r2
-add r1, r2, r3
+or %0, %0, r3
+xor %0, %0, r2
 zjmp %248
