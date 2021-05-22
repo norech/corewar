@@ -169,6 +169,11 @@ typedef struct champion {
 
     int cycles_since_last_live;
 
+    ///
+    /// Identifier used by instructions to identify the champion
+    ///
+    int prog_number;
+
     bool is_dead;
 } champion_t;
 

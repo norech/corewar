@@ -36,6 +36,7 @@ int create_champion(champion_t *champ, program_memory_t *mem)
 
     my_memset(champ, 0, sizeof(champion_t));
     mem->owner_id++;
+    champ->prog_number = mem->owner_id;
     champ->id = mem->owner_id;
     champ->instances_max = 10;
     champ->instances = malloc(sizeof(program_memory_t) * champ->instances_max);
