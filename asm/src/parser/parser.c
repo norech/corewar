@@ -11,54 +11,6 @@
 #include <asm/parser.h>
 #include <asm/util.h>
 
-static void fill_argument_body(arg_t *output_arg, char prefix, int number)
-{
-    if (prefix == '\0') {
-        output_arg->type = ARG_IND_NB;
-        output_arg->ind_val = number;
-    }
-    if (prefix == DIRECT_CHAR) {
-        output_arg->type = ARG_DIR_NB;
-        output_arg->dir_val = number;
-    }
-    if (prefix == 'r') {
-        output_arg->type = ARG_REG_ID;
-        output_arg->reg_id = number;
-    }
-}
-
-int parse_next_argument(arg_t *output_arg, instruction_t *instr,
-    parser_t *parser)
-{
-    int number;
-    char *label;
-    char prefix = '\0';
-
-    consume_whitespaces(parser);
-    if (*parser->pos == DIRECT_CHAR || *parser->pos == 'r')
-        prefix = *(parser->pos++);
-    if (consume_number(&number, parser) != 0) {
-        fill_argument_body(output_arg, prefix, number);
-    } else {
-        if ((number = consume_arg_label(&label, parser)) <= 0)
-            return (parser_error(parser, EXPECT_TOKEN, "argument value"));
-        output_arg->label = my_strndup(label, number);
-        if (output_arg->label == NULL)
-            return (parser_error(parser, ALLOC_FAILED, NULL));
-        fill_argument_body(output_arg, prefix, number);
-    }
-    instr->args_count++;
-    consume_whitespaces(parser);
-    return (0);
-}
-
-
-int parse_next_label(instruction_t *out_instr UNUSED, parser_t *parser
-    UNUSED)
-{
-    return (0);
-}
-
 int parse_next_instruction(instruction_t *out_instr, parser_t *parser)
 {
     bool end_with_comma = true;
@@ -80,33 +32,6 @@ int parse_next_instruction(instruction_t *out_instr, parser_t *parser)
     if (*parser->pos != '\0' && consume_newlines(parser) == 0)
         return (parser_error(parser, EXPECT_TOKEN, "'\\n'"));
     return (*parser->pos == '\0' ? 0 : 1);
-}
-
-int parse_labels(label_t **output_labels, parser_t *parser)
-{
-    char *label = NULL;
-    label_t *prev;
-    label_t *cur = NULL;
-    int count = 0;
-    int code;
-
-    *output_labels = NULL;
-    while ((code = consume_label(&label, parser)) > 0) {
-        while (consume_whitespaces(parser) != 0
-            || consume_newlines(parser) != 0);
-        prev = cur;
-        cur = my_calloc(1, sizeof(label_t));
-        if (cur == NULL)
-            return (parser_error(parser, ALLOC_FAILED, NULL));
-        cur->label = label;
-        cur->prev = prev;
-        if (prev != NULL)
-            prev->next = cur;
-        if (*output_labels == NULL)
-            *output_labels = cur;
-        count++;
-    }
-    return (code >= 0 ? count : code);
 }
 
 int link_instructions(instruction_t *target, labels_ll_t *labels,

@@ -20,7 +20,8 @@ void get_start_and_end(size_t *start, size_t *end, int id_1, int id_2)
     }
 }
 
-ssize_t distance_between_instructions(instruction_t *ins_1, instruction_t *ins_2)
+ssize_t distance_between_instructions(instruction_t *ins_1,
+    instruction_t *ins_2)
 {
     ssize_t distance = 0;
     size_t start = 0;

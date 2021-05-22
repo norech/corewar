@@ -54,6 +54,8 @@ SRC_UTIL = 		src/util/write_endian.c \
 				src/util/distance_between_instructions.c \
 
 SRC_PARSER = 	src/parser/parser.c \
+				src/parser/parser_args.c \
+				src/parser/parser_labels.c \
 				src/parser/parser_error.c \
 				src/parser/read_file.c \
 				src/parser/init_parser.c

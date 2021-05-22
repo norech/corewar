@@ -180,4 +180,9 @@ int read_file(char *output_buffer, char *file);
 
 int init_analyzer(analyzer_t *output_analyzer, parser_t *parser);
 
+int parse_next_argument(arg_t *output_arg, instruction_t *instr,
+    parser_t *parser);
+
+int parse_labels(label_t **output_labels, parser_t *parser);
+
 #endif /* DC348E51_57D5_4ED5_9CDF_0EBCA8AD3A30 */
