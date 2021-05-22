@@ -1,5 +1,7 @@
 {
     "files.associations": {
+        "atomic": "cpp",
+        "cstdint": "cpp",
         "parser.h": "c"
     }
 }
