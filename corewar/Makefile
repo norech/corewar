@@ -61,6 +61,8 @@ SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/fork.c \
 				src/instructions/live.c \
 				src/instructions/zjmp.c \
+				src/instructions/and.c	\
+				src/instructions/add.c
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \
