@@ -17,6 +17,9 @@ static bool are_arguments_valid(runtime_op_t *op, op_t *tab_op)
     {
         if ((op->args[i].type & tab_op->type[i]) == 0)
             return (false);
+        if (op->args[i].type == ARG_REG_ID
+            && IS_INVALID_REGISTER_ID(op->args[i].reg_id))
+                return (false);
     }
     return (true);
 }
