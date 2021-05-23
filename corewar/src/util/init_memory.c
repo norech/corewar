@@ -17,7 +17,7 @@ int init_memory(program_memory_t *mem)
     my_memset(mem, 0, sizeof(program_memory_t));
     mem->start_pos = memory;
     mem->end_pos = memory + MEM_SIZE;
-    mem->pos = memory + MEM_SIZE - 1019;
+    mem->pos = memory;
     return (0);
 }
 
