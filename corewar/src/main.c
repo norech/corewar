@@ -42,8 +42,8 @@ static int read_args(vm_t *vm, args_t *args)
             arg->name))
                 return (-1);
         if (arg->has_prog_number) {
-            vm->champions[i].instances[0].registers[0] = arg->prog_number;
             vm->champions[i].prog_number = arg->prog_number;
+            vm->champions[i].instances[0].registers[0] = arg->prog_number;
         }
         vm->champions[i + 1].instances = NULL;
         i++;

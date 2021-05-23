@@ -20,7 +20,7 @@ bool live(runtime_op_t *op UNUSED, vm_t *vm,
 
     for (int i = 0; i < vm->champions_count; i++) {
         if (vm->champions[i].prog_number == prog_number)
-            champ = &vm->champions[prog_number - 1];
+            champ = &vm->champions[i];
     }
     if (champ == NULL)
         return (true);
