@@ -18,7 +18,10 @@
 int main(int ac, char *av[])
 {
     vm_t vm = {0};
+    args_t args;
 
+    if (args_manager(ac, av, &args) == 84)
+        return (84);
     vm.cycles_to_die = CYCLE_TO_DIE;
     vm.debug = true;
     vm.champions = malloc(sizeof(champion_t) * ac);

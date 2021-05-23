@@ -57,6 +57,7 @@ SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
 				src/memory/write_relative_endian_bytes.c \
 
 SRC_PARSER =	src/parser/parse_bytecode.c \
+				src/parser/args_manager.c \
 
 SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/fork.c \
