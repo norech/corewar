@@ -58,6 +58,7 @@ SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
 
 SRC_PARSER =	src/parser/parse_bytecode.c \
 				src/parser/args_manager.c \
+				src/parser/args_manager2.c \
 
 SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/fork.c \
@@ -78,6 +79,8 @@ SRC_INSTRUCT = 	src/instructions/aff.c \
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \
+				src/util/alloc_vm.c \
+				src/util/init_vm.c \
 				src/util/move_to_champion_pos.c \
 				src/util/append_instance.c \
 				src/util/swap_header.c \
