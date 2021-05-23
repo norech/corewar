@@ -20,6 +20,7 @@ int main(int ac, char *av[])
     vm_t vm = {0};
 
     vm.cycles_to_die = CYCLE_TO_DIE;
+    vm.debug = true;
     vm.champions = malloc(sizeof(champion_t) * ac);
     if (vm.champions == NULL)
         return (84);
@@ -31,10 +32,9 @@ int main(int ac, char *av[])
             return (84);
         jump_relative_bytes(&vm.memory, 1200);
     }
-    while (true) {
+    while (true)
         if (next_step(&vm) == 1)
             break;
-    }
     dump_memory(&vm.memory);
     destroy_memory(&vm.memory);
     free(vm.champions);

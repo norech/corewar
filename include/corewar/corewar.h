@@ -182,6 +182,7 @@ typedef struct vm {
     int champions_count;
     int live_calls;
     int cycles_to_die;
+    bool debug;
     program_memory_t memory;
 } vm_t;
 

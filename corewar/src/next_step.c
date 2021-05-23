@@ -40,10 +40,10 @@ static int execute_op(vm_t *vm, program_memory_t *instance)
     runtime_op_t op;
 
     if (!parse_bytecode(&op, instance)) {
-        debug_and_pause(&op, instance);
+        (vm->debug ? debug_and_pause(&op, instance) : 0);
         return (-1);
     }
-    debug_and_pause(&op, instance);
+    (vm->debug ? debug_and_pause(&op, instance) : 0);
     for (int i = 0; INSTRUCTIONS[i].opcode != 0; i++) {
         if (INSTRUCTIONS[i].opcode != op.code)
             continue;
@@ -114,5 +114,5 @@ int next_step(vm_t *vm)
             next_instance_step(vm, i, j);
         }
     }
-    return (check_winner(vm));
+    return (vm->debug ? 0 : check_winner(vm));
 }
