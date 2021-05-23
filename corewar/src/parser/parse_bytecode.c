@@ -13,11 +13,19 @@
 
 static bool are_arguments_valid(runtime_op_t *op, op_t *tab_op)
 {
-    for (int i = 0; i < op->args_count; i++)
-    {
+    for (int i = 0; i < op->args_count; i++) {
         if ((op->args[i].type & tab_op->type[i]) == 0)
             return (false);
     }
+    return (true);
+}
+
+static bool are_values_correct(runtime_op_t *op, op_t *tab_op UNUSED)
+{
+    for (int i = 0; i < op->args_count; i++)
+        if (op->args[i].type == ARG_REG_ID
+            && IS_INVALID_REGISTER_ID(op->args[i].reg_id))
+                return (false);
     return (true);
 }
 
@@ -40,6 +48,8 @@ static bool parse_arguments(runtime_op_t *op, program_memory_t *mem,
         if (arg->type == ARG_REG_ID && fetch_reg_id(&arg->reg_id, mem) < 0)
             return (false);
     }
+    if (!are_values_correct(op, tab_op))
+        return (false);
     return (true);
 }
 
