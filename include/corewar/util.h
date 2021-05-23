@@ -26,4 +26,6 @@ int append_instance(champion_t *champ, program_memory_t *instance);
 
 int swap_header(header_t *header);
 
+int init_vm(vm_t *vm, int champions_count);
+
 #endif /* D7E5D541_192D_4F43_B332_01BACAEF35CE */
