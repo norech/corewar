@@ -30,9 +30,7 @@ reg_data_t resolve_arg_value(arg_t *arg, program_memory_t *mem)
 
 short resolve_arg_index_value(arg_t *arg, program_memory_t *mem)
 {
-    ind_t index = 0;
     reg_data_t data = resolve_arg_value(arg, mem);
 
-    index = (short)data % IDX_MOD;
-    return (index);
+    return ((short)data);
 }

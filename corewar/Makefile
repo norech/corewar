@@ -54,6 +54,7 @@ SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
 				src/memory/copy_relative_endian_bytes.c \
 				src/memory/jump_relative_bytes.c \
 				src/memory/write_relative_bytes.c \
+				src/memory/write_relative_endian_bytes.c \
 
 SRC_PARSER =	src/parser/parse_bytecode.c \
 
@@ -67,6 +68,8 @@ SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/xor.c  \
 				src/instructions/sub.c \
 				src/instructions/lfork.c \
+				src/instructions/st.c \
+				src/instructions/sti.c \
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \

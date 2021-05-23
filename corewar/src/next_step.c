@@ -26,6 +26,8 @@ static const struct instruction_map INSTRUCTIONS[] = {
     { OP_OR, or},
     { OP_SUB, sub},
     { OP_LFORK, lfork },
+    { OP_ST, st },
+    { OP_STI, sti },
     { 0, NULL }
 };
 
@@ -73,7 +75,7 @@ static int next_instance_step(vm_t *vm, int champion_id, int instance_id)
     return (0);
 }
 
-static int check_winner(vm_t *vm)
+int check_winner(vm_t *vm)
 {
     int alive_players = 0;
     champion_t *champion;

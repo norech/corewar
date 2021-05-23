@@ -14,10 +14,10 @@
 bool zjmp(runtime_op_t *op, champion_t *champ UNUSED,
     program_memory_t *instance)
 {
-    //if (instance->carry == true)
+    if (instance->carry == true)
         jump_relative_bytes(instance,
-            resolve_arg_index_value(&op->args[0],
-                instance) - op->bytecount);
+            (resolve_arg_index_value(&op->args[0],
+                instance) % IDX_MOD) - op->bytecount);
     return (true);
 }
 
