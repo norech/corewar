@@ -19,7 +19,10 @@ int main(int ac, char *av[])
 {
     program_memory_t mem;
     champion_t champ[ac];
+    args_t args;
 
+    if (args_manager(ac, av, &args) == 84)
+        return (84);
     champ[ac - 1].instances = NULL;
     init_memory(&mem);
     for (int i = 1; i < ac; i++) {
@@ -31,5 +34,5 @@ int main(int ac, char *av[])
     while (true) {
         next_step(&mem, champ);
     }
-    destroy_memory(&mem);
+    destroy_memory(&mem, &args);
 }
