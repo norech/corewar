@@ -42,4 +42,10 @@ bool sti(runtime_op_t *op, vm_t *vm, program_memory_t *instance);
 
 bool ld(runtime_op_t *op, vm_t *vm, program_memory_t *instance);
 
+bool ldi(runtime_op_t *op, vm_t *vm, program_memory_t *instance);
+
+bool lld(runtime_op_t *op, vm_t *vm, program_memory_t *instance);
+
+bool lldi(runtime_op_t *op, vm_t *vm, program_memory_t *instance);
+
 #endif /* C9B9B24D_0042_4C39_85A6_CCDA2F2339E1 */

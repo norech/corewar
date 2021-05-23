@@ -15,12 +15,13 @@
 #include <corewar/util.h>
 #include <stdlib.h>
 
-bool ld(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
+bool ldi(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
     program_memory_t *instance)
 {
-    instance->registers[ op->args[1].reg_id - 1 ]
-        = resolve_arg_value(&op->args[0], instance, true);
-    if (instance->registers[op->args[1].reg_id - 1] == 0)
+    instance->registers[ op->args[2].reg_id - 1 ]
+        = resolve_arg_index_value(&op->args[0], instance, true, false)
+            + resolve_arg_index_value(&op->args[1], instance, true, false);
+    if (instance->registers[op->args[2].reg_id - 1] == 0)
         instance->carry = 1;
     else
         instance->carry = 0;

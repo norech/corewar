@@ -16,8 +16,8 @@ bool zjmp(runtime_op_t *op, champion_t *champ UNUSED,
 {
     if (instance->carry == true)
         jump_relative_bytes(instance,
-            (resolve_arg_index_value(&op->args[0],
-                instance) % IDX_MOD) - op->bytecount);
+            resolve_arg_index_value(&op->args[0],
+                instance, true, true) - op->bytecount);
     return (true);
 }
 

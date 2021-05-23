@@ -16,8 +16,8 @@ bool xor(runtime_op_t *op UNUSED, champion_t *champ UNUSED,
     program_memory_t *instance)
 {
     instance->registers[op->args[2].reg_id - 1] =
-        resolve_arg_value(&op->args[0], instance)
-            ^ resolve_arg_value(&op->args[1], instance);
+        resolve_arg_value(&op->args[0], instance, false)
+            ^ resolve_arg_value(&op->args[1], instance, false);
     if (instance->registers[op->args[2].reg_id - 1] == 0)
         instance->carry = 1;
     else

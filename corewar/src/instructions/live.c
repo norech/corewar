@@ -16,7 +16,7 @@ bool live(runtime_op_t *op UNUSED, vm_t *vm,
     program_memory_t *instance)
 {
     champion_t *champ = NULL;
-    int prog_number = resolve_arg_value(&op->args[0], instance);
+    int prog_number = resolve_arg_value(&op->args[0], instance, false);
 
     for (int i = 0; i < vm->champions_count; i++) {
         if (vm->champions[i].prog_number == prog_number)

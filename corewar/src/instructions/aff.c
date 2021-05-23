@@ -17,6 +17,6 @@ bool aff(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
 {
     if (op->args[0].type != ARG_REG_ID)
         return (false);
-    my_printf("%c", resolve_arg_value(&op->args[0], instance) % 256);
+    my_printf("%c", resolve_arg_value(&op->args[0], instance, false) % 256);
     return (true);
 }

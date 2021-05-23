@@ -71,6 +71,9 @@ SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/st.c \
 				src/instructions/sti.c \
 				src/instructions/ld.c \
+				src/instructions/ldi.c \
+				src/instructions/lld.c \
+				src/instructions/lldi.c \
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \

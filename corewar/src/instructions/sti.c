@@ -19,11 +19,12 @@ bool sti(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
     program_memory_t *instance)
 {
     reg_data_t data;
-    int index = (resolve_arg_index_value(&op->args[1], instance)
-        + resolve_arg_index_value(&op->args[2], instance)) % IDX_MOD;
+    int index = (resolve_arg_index_value(&op->args[1], instance, false, false)
+        + resolve_arg_index_value(&op->args[2], instance, false, false))
+        % IDX_MOD;
 
     jump_relative_bytes(instance, index - op->bytecount);
-    data = resolve_arg_value(&op->args[0], instance);
+    data = resolve_arg_value(&op->args[0], instance, false);
     write_relative_endian_bytes(instance, &data, REG_SIZE);
     jump_relative_bytes(instance, op->bytecount - index - REG_SIZE);
     return (0);

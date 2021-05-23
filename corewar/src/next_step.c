@@ -29,6 +29,9 @@ static const struct instruction_map INSTRUCTIONS[] = {
     { OP_ST, st },
     { OP_STI, sti },
     { OP_LD, ld },
+    { OP_LDI, ldi },
+    { OP_LLD, lld },
+    { OP_LLDI, lldi },
     { 0, NULL }
 };
 

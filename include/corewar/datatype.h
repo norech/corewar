@@ -48,8 +48,10 @@ int fetch_byte(byte_t *chr_val, program_memory_t *mem);
 /// Will resolve indirect values.
 /// Will go in registry.
 ///
-reg_data_t resolve_arg_value(arg_t *arg, program_memory_t *mem);
+reg_data_t resolve_arg_value(arg_t *arg, program_memory_t *mem,
+    bool is_idx_mod_index);
 
-short resolve_arg_index_value(arg_t *arg, program_memory_t *mem);
+short resolve_arg_index_value(arg_t *arg, program_memory_t *mem,
+    bool is_idx_mod_index, bool is_idx_mod_val);
 
 #endif /* CCAA70C1_76EE_4C10_A2D1_BD1B7137312A */
