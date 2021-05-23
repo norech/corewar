@@ -81,7 +81,7 @@ int parse_program(parser_t *parser)
     while (true) {
         while (consume_whitespaces(parser) != 0
             || consume_newlines(parser) != 0);
-        if (parser->pos[0] == '.' && (code = get_prog_name(parser)) < 0)
+        if ((code = get_prog_name(parser)) < 0)
             break;
         if ((code = parse_labels(&labels, parser)) < 0)
             break;
