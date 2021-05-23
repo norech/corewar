@@ -23,7 +23,8 @@ bool fork_op(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
         return (false);
     my_memcpy(&forked_instance, instance, sizeof(program_memory_t));
     jump_relative_bytes(&forked_instance,
-        (op->args[0].dir_val % IDX_MOD) - op->bytecount);
+        resolve_arg_index_value(&op->args[0],
+                instance, true, true) - op->bytecount);
     if (append_instance(&vm->champions[instance->owner_id - 1],
         &forked_instance) < 0)
             return (false);
