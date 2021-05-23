@@ -34,5 +34,5 @@ int main(int ac, char *av[])
     while (true) {
         next_step(&mem, champ);
     }
-    destroy_memory(&mem, &args);
+    destroy_memory(&mem);
 }
