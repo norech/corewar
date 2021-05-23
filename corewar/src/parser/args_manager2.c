@@ -48,7 +48,7 @@ int add_to_args(g_args_t **prev, g_args_t *last_arg, char *key)
     return (0);
 }
 
-int loop_champions_args(int ac, char **av, int index, args_t *args)
+int loop_champions_args(int ac, char **av, int *index, args_t *args)
 {
     char *key = NULL;
     char *value = NULL;
@@ -59,13 +59,13 @@ int loop_champions_args(int ac, char **av, int index, args_t *args)
     if (last_arg == NULL)
         return (84);
     while (true) {
-        if ((key = read_next_value(ac, av, &index)) == NULL)
+        if ((key = read_next_value(ac, av, index)) == NULL)
             break;
         if (*key != '-') {
             if (add_to_args(&prev, last_arg, key) == 84)
                 return (84);
             continue;
-        } else if ((value = read_next_value(ac, av, &index)) == NULL
+        } else if ((value = read_next_value(ac, av, index)) == NULL
             || parse_value(key, value, last_arg) == 84)
                 return (84);
     }

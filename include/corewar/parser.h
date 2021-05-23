@@ -23,6 +23,7 @@ typedef struct group_args_s
 typedef struct args_manager_s
 {
     int nbr_cycle;
+    bool debug_mode;
     g_args_t *g_args;
 } args_t;
 
@@ -30,7 +31,7 @@ bool parse_bytecode(runtime_op_t *op, program_memory_t *mem);
 int args_manager(int ac, char *av[], args_t *args);
 
 char *read_next_value(int ac, char **av, int *i);
-int loop_champions_args(int ac, char **av, int index, args_t *args);
+int loop_champions_args(int ac, char **av, int *index, args_t *args);
 
 #define HELP_MESSAGE "USAGE\n\
 ./corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address] prog_name] \
