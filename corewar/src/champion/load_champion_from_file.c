@@ -21,11 +21,11 @@ int load_champion_from_file(champion_t *champ, char *file)
     ssize_t len;
     memory_slot_t *pos = champ->instances[0].pos;
 
-    if (fd < 0)
-        return (-1);
-    if (!read(fd, &header, sizeof(header_t)))
+    if (fd < 0 || !read(fd, &header, sizeof(header_t)))
         return (-1);
     swap_header(&header);
+    if (header.magic != COREWAR_EXEC_MAGIC)
+        return (-1);
     my_memcpy(champ->name, header.prog_name, sizeof(champ->name));
     while ((len = read(fd, buff, 1024)) != 0) {
         if (len == -1)
