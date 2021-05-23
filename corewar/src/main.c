@@ -18,7 +18,7 @@
 
 static int count_args(args_t *args)
 {
-    int i = 1;
+    int i = 0;
 
     for (g_args_t *arg = args->g_args; arg->next != NULL; arg = arg->next)
         i++;
@@ -27,7 +27,7 @@ static int count_args(args_t *args)
 
 static int read_args(vm_t *vm, args_t *args)
 {
-    int i = 1;
+    int i = 0;
 
     vm->cycles_until_dump = args->nbr_cycle;
     vm->debug = args->debug_mode;
@@ -38,11 +38,14 @@ static int read_args(vm_t *vm, args_t *args)
         } else {
             jump_relative_bytes(&vm->memory, 150);
         }
-        if (create_champion_from_file(&vm->champions[i - 1], &vm->memory,
+        if (create_champion_from_file(&vm->champions[i], &vm->memory,
             arg->name))
-                return (84);
-        if (arg->has_prog_number)
-            vm->champions[i - 1].prog_number = arg->prog_number;
+                return (-1);
+        if (arg->has_prog_number) {
+            vm->champions[i].instances[0].registers[0] = arg->prog_number;
+            vm->champions[i].prog_number = arg->prog_number;
+        }
+        vm->champions[i + 1].instances = NULL;
         i++;
     }
     return (0);
@@ -62,7 +65,7 @@ static void free_args(vm_t *vm, args_t *args)
 int main(int ac, char *av[])
 {
     vm_t vm = {0};
-    args_t args;
+    args_t args = {0};
 
     args.nbr_cycle = 10;
     vm.cycles_until_dump = -1;

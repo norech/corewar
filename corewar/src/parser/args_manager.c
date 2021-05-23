@@ -14,8 +14,10 @@ static int get_flag(int ac, char **av, int *i, args_t *args)
 {
     char *key = NULL;
 
-    if ((key = read_next_value(ac, av, i)) == NULL)
-        return (84);
+    if ((key = read_next_value(ac, av, i)) == NULL) {
+        (*i)--;
+        return (0);
+    }
     if (my_strcmp(key, "-debug") != 0) {
         (*i)--;
         return (0);
@@ -29,8 +31,10 @@ static int get_dump(int ac, char **av, int *i, args_t *args)
     char *key = NULL;
     char *value = NULL;
 
-    if ((key = read_next_value(ac, av, i)) == NULL)
-        return (84);
+    if ((key = read_next_value(ac, av, i)) == NULL) {
+        (*i)--;
+        return (0);
+    }
     if (my_strcmp(key, "-dump") != 0) {
         (*i)--;
         return (0);
