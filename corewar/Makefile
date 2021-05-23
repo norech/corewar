@@ -70,6 +70,7 @@ SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/lfork.c \
 				src/instructions/st.c \
 				src/instructions/sti.c \
+				src/instructions/ld.c \
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \
