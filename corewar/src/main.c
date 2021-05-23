@@ -69,9 +69,12 @@ int main(int ac, char *av[])
 
     args.nbr_cycle = 10;
     vm.cycles_until_dump = -1;
-    if (args_manager(ac, av, &args) == 84 || count_args(&args) < 2)
-        return (84);
-    if (init_vm(&vm, count_args(&args)) < 0 || init_memory(&vm.memory) < 0)
+    if (ac == 2 && (my_strcmp(av[1], "-h") == 0)) {
+        my_fd_putstr(1, HELP_MESSAGE);
+        return (0);
+    }
+    if (args_manager(ac, av, &args) == 84 || count_args(&args) < 2
+        || init_vm(&vm, count_args(&args)) < 0 || init_memory(&vm.memory) < 0)
         return (84);
     if (read_args(&vm, &args) < 0)
         return (84);

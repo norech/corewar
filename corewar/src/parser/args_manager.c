@@ -52,10 +52,6 @@ int args_manager(int ac, char *av[], args_t *args)
     int index = 1;
     int code;
 
-    if (ac == 2 && (my_strcmp(av[1], "-h") == 0)) {
-        my_fd_putstr(1, HELP_MESSAGE);
-        return (0);
-    }
     if (get_flag(ac, av, &index, args) == 84)
         return (84);
     if (get_dump(ac, av, &index, args) == 84)

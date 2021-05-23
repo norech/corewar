@@ -34,7 +34,8 @@ char *read_next_value(int ac, char **av, int *i);
 int loop_champions_args(int ac, char **av, int *index, args_t *args);
 
 #define HELP_MESSAGE "USAGE\n\
-./corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address] prog_name] \
+./corewar [-debug] [-dump nbr_cycle] [[-n prog_number] \
+[-a load_address] prog_name] \
 ...\n\
 \n\
 DESCRIPTION\n\
