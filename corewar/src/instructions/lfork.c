@@ -14,7 +14,7 @@
 #include <corewar/util.h>
 #include <stdlib.h>
 
-bool fork_op(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
+bool lfork(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
     program_memory_t *instance)
 {
     program_memory_t forked_instance;
@@ -23,7 +23,7 @@ bool fork_op(runtime_op_t *op UNUSED, vm_t *vm UNUSED,
         return (false);
     my_memcpy(&forked_instance, instance, sizeof(program_memory_t));
     jump_relative_bytes(&forked_instance,
-        (op->args[0].dir_val % IDX_MOD) - op->bytecount);
+        (op->args[0].dir_val) - op->bytecount);
     if (append_instance(&vm->champions[instance->owner_id - 1],
         &forked_instance) < 0)
             return (false);

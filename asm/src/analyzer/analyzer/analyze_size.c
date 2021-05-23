@@ -17,12 +17,12 @@ int analyze_size(analyzer_t *analyzer, instruction_t *instruction)
     if (HAS_CODING_BYTE(instruction->bytecode))
         size++;
     for (int i = 0; i < instruction->args_count; i++) {
-        if ((tab_op->type[i] & T_IDX) != 0) {
-            size += 2;
-            continue;
-        }
         if ((instruction->args[i].type & T_REG) != 0) {
             size += 1;
+            continue;
+        }
+        if ((tab_op->type[i] & T_IDX) != 0) {
+            size += 2;
             continue;
         }
         size += 2;

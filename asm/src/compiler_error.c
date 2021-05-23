@@ -17,22 +17,19 @@ static void show_parser_error(parser_t *parser, parser_error_t *error)
 {
     int char_pos = 1;
     int line = get_line_num_parser(&char_pos, parser, error->pos);
+    error_parser_t err_struct[5] = {
+        {EXPECT_TOKEN, "Expected %s, found '%c'\n"},
+        {INVALID_TOKEN, "Invalid token: %s\n"},
+        {MULT, "Multiple definition of %s\n"}, {LONG, "%s too long\n"},
+        {ALLOC_FAILED, "Malloc failed\n"}
+    };
 
     my_dprintf(2, "%s:%d:%d: ", parser->filename, line, char_pos);
-    switch (error->code) {
-        case ALLOC_FAILED:
-            my_dprintf(2, "Malloc failed\n");
-            break;
-        case EXPECT_TOKEN:
-            my_dprintf(2, "Expected %s, found '%c'\n", error->message,
-                *error->pos);
-            break;
-        case INVALID_TOKEN:
-            my_dprintf(2, "Invalid token: %s\n", error->message);
-            break;
-        default:
-        case NO_ERROR:
-            break;
+    for (int i = 0; i != 4; i++) {
+        if (err_struct[i].error_code == error->code) {
+            my_dprintf(2, err_struct[i].format, error->message, error->pos[0]);
+            return;
+        }
     }
 }
 
@@ -50,6 +47,12 @@ static void show_analyzer_error(analyzer_t *parser, analyzer_error_t *error)
             break;
         case INVALID_ARG_TYPE:
             my_dprintf(2, "Invalid arg type for %s.\n", error->message);
+            break;
+        case INVALID_REG_VALUE:
+            my_dprintf(2, "Invalid reg value. Value should be 1>$value<10\n");
+            break;
+        case INVALID_TARGET_LABEL:
+            my_dprintf(2, "Invalid target label: %s.\n", error->message);
             break;
         default:
         case NO_ANALYZER_ERROR:

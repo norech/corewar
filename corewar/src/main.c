@@ -17,22 +17,28 @@
 
 int main(int ac, char *av[])
 {
-    program_memory_t mem;
-    champion_t champ[ac];
+    vm_t vm = {0};
     args_t args;
 
     if (args_manager(ac, av, &args) == 84)
         return (84);
-    champ[ac - 1].instances = NULL;
-    init_memory(&mem);
+    vm.cycles_to_die = CYCLE_TO_DIE;
+    vm.debug = true;
+    vm.champions = malloc(sizeof(champion_t) * ac);
+    if (vm.champions == NULL)
+        return (84);
+    vm.champions_count = ac - 1;
+    vm.champions[ac - 1].instances = NULL;
+    init_memory(&vm.memory);
     for (int i = 1; i < ac; i++) {
-        if (create_champion_from_file(&champ[i - 1], &mem, av[i]))
+        if (create_champion_from_file(&vm.champions[i - 1], &vm.memory, av[i]))
             return (84);
-        jump_relative_bytes(&mem, 1200);
+        jump_relative_bytes(&vm.memory, 1200);
     }
-    mem.pos = champ[0].instances[0].pos;
-    while (true) {
-        next_step(&mem, champ);
-    }
-    destroy_memory(&mem);
+    while (true)
+        if (next_step(&vm) == 1)
+            break;
+    dump_memory(&vm.memory);
+    destroy_memory(&vm.memory);
+    free(vm.champions);
 }

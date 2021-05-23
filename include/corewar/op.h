@@ -115,10 +115,10 @@ typedef struct op_s     op_t;
 #define DIR_SIZE        4
 #define REG_SIZE        DIR_SIZE
 
-typedef uint16_t ind_t;
-typedef uint32_t dir_t;
-typedef uint8_t reg_id_t;
-typedef uint32_t reg_data_t;
+typedef int16_t ind_t;
+typedef int32_t dir_t;
+typedef int8_t reg_id_t;
+typedef int32_t reg_data_t;
 
 extern  op_t    OP_TAB[];
 

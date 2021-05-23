@@ -11,12 +11,24 @@
 #include "corewar/op.h"
 #include "corewar/datatype.h"
 
+static bool are_arguments_valid(runtime_op_t *op, op_t *tab_op)
+{
+    for (int i = 0; i < op->args_count; i++)
+    {
+        if ((op->args[i].type & tab_op->type[i]) == 0)
+            return (false);
+    }
+    return (true);
+}
+
 static bool parse_arguments(runtime_op_t *op, program_memory_t *mem,
     op_t *tab_op)
 {
     arg_t *arg;
     bool is_index = false;
 
+    if (!are_arguments_valid(op, tab_op))
+        return (false);
     for (int i = 0; i < op->args_count; i++) {
         arg = &op->args[i];
         is_index = (tab_op->type[i] & T_IDX) != 0;

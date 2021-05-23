@@ -37,8 +37,13 @@ int generate_coding_byte(generator_t *generator, instruction_t *instruction)
 
     if (!HAS_CODING_BYTE(instruction->bytecode))
         return (0);
-    for (; i < instruction->args_count; i++)
-        byte = (byte << 2) | (instruction->args[i].type);
+    for (; i < instruction->args_count; i++) {
+        if ((instruction->args[i].type & ARG_IND_NB) != 0)
+            byte = (byte << 2) | 0b11;
+        else
+            byte = (byte << 2) | (CONVERT_TO_ARG_TYPE(
+                instruction->args[i].type));
+    }
     for (; i < 4; i++) {
         byte = (byte << 2);
     }
@@ -68,6 +73,7 @@ int generate_instructions(generator_t *generator)
 
 int generate_code(generator_t *generator)
 {
+    swap_header(generator->header);
     write(generator->fd, generator->header, sizeof(header_t));
     generate_instructions(generator);
     return (0);

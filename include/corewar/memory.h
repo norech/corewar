@@ -35,4 +35,7 @@ void jump_relative_bytes(program_memory_t *mem, size_t increment);
 ///
 void write_relative_bytes(program_memory_t *mem, void *src, size_t count);
 
+void write_relative_endian_bytes(program_memory_t *mem, void *src,
+    size_t count);
+
 #endif /* D2BF0B2A_7B9B_4B0B_99BD_994AB378702F */

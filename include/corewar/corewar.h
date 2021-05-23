@@ -166,10 +166,28 @@ typedef struct champion {
     /// Number of instances that can be created before overflow
     ///
     int instances_max;
+
+    int cycles_since_last_live;
+
+    ///
+    /// Identifier used by instructions to identify the champion
+    ///
+    int prog_number;
+
+    bool is_dead;
 } champion_t;
 
+typedef struct vm {
+    champion_t *champions;
+    int champions_count;
+    int live_calls;
+    int cycles_to_die;
+    bool debug;
+    program_memory_t memory;
+} vm_t;
+
 #define IS_INVALID_REGISTER_ID(id) \
-    (arg->reg_id <= 0 || arg->reg_id > REG_NUMBER)
+    (id <= 0 || id > REG_NUMBER)
 
 struct operation {
     ///
@@ -197,7 +215,7 @@ static inline bool is_arg_type_valid(byte_t opcode, int arg_index,
     return ((OP_TAB[opcode].type[arg_index] & arg_type) != 0);
 }
 
-int next_step(program_memory_t *mem, champion_t *champions);
+int next_step(vm_t *vm);
 
 #define COUNTOF(arr) (sizeof(arr) / sizeof(*arr))
 

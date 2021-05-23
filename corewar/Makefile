@@ -54,6 +54,7 @@ SRC_MEMORY = 	src/memory/copy_relative_bytes.c \
 				src/memory/copy_relative_endian_bytes.c \
 				src/memory/jump_relative_bytes.c \
 				src/memory/write_relative_bytes.c \
+				src/memory/write_relative_endian_bytes.c \
 
 SRC_PARSER =	src/parser/parse_bytecode.c \
 				src/parser/args_manager.c \
@@ -62,11 +63,24 @@ SRC_INSTRUCT = 	src/instructions/aff.c \
 				src/instructions/fork.c \
 				src/instructions/live.c \
 				src/instructions/zjmp.c \
+				src/instructions/and.c	\
+				src/instructions/add.c	\
+				src/instructions/or.c	\
+				src/instructions/xor.c  \
+				src/instructions/sub.c \
+				src/instructions/lfork.c \
+				src/instructions/st.c \
+				src/instructions/sti.c \
+				src/instructions/ld.c \
+				src/instructions/ldi.c \
+				src/instructions/lld.c \
+				src/instructions/lldi.c \
 
 SRC_UTIL =		src/util/alloc_memory.c \
 				src/util/init_memory.c \
 				src/util/move_to_champion_pos.c \
-				src/util/append_instance.c
+				src/util/append_instance.c \
+				src/util/swap_header.c \
 
 SRC_CHAMPION = 	src/champion/create_champion.c \
 				src/champion/load_champion_from_file.c \

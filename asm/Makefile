@@ -51,15 +51,21 @@ SRC_UTIL = 		src/util/write_endian.c \
 				src/util/push_instruction.c \
 				src/util/pop_instruction.c \
 				src/util/get_line_num.c \
+				src/util/distance_between_instructions.c \
+				src/util/swap_header.c \
 
 SRC_PARSER = 	src/parser/parser.c \
+				src/parser/parser_args.c \
+				src/parser/parser_labels.c \
 				src/parser/parser_error.c \
 				src/parser/read_file.c \
-				src/parser/init_parser.c
+				src/parser/init_parser.c	\
+				src/parser/comment.c
 
 SRC_ANALYZER = 	src/analyzer/analyzer.c \
 				src/analyzer/analyzer_error.c \
 				src/analyzer/init_analyzer.c \
+				src/analyzer/analyzer/analyze_labels.c \
 				src/analyzer/analyzer/analyze_signature.c \
 				src/analyzer/analyzer/analyze_size.c \
 
@@ -68,7 +74,10 @@ SRC_CONSUMERS = src/parser/consumers/consume_arg_label.c \
 				src/parser/consumers/consume_instruction_mnemo.c \
 				src/parser/consumers/consume_newlines.c \
 				src/parser/consumers/consume_number.c \
-				src/parser/consumers/consume_whitespaces.c
+				src/parser/consumers/consume_label.c \
+				src/parser/consumers/consume_whitespaces.c	\
+				src/parser/consumers/consume_arg_name.c	\
+				src/parser/consumers/consume_comment.c \
 
 SRC_COMPILER =	src/compiler.c \
 				src/compiler_error.c

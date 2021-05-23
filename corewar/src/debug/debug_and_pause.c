@@ -49,7 +49,7 @@ void debug_memory(runtime_op_t *curr_op, program_memory_t *mem)
         old = my_calloc(len, sizeof(char));
     for (size_t i = 0; i < len; i++) {
         print_debug_byte(curr_op, mem, old, i);
-        if (i % 25 == 24 || i == len - 1) {
+        if (i % 32 == 31 || i == len - 1) {
             my_printf("\n");
         } else {
             my_printf(" ");
