@@ -6,11 +6,13 @@
 */
 
 #include <corewar/corewar.h>
+#include <stddef.h>
+#include <my/io.h>
 
-void jump_relative_bytes(program_memory_t *mem, size_t increment)
+void jump_relative_bytes(program_memory_t *mem, ptrdiff_t increment)
 {
-    long offset = mem->pos - mem->start_pos;
-    long size = mem->end_pos - mem->start_pos;
+    ptrdiff_t offset = mem->pos - mem->start_pos;
+    ptrdiff_t size = mem->end_pos - mem->start_pos;
 
     offset += increment;
     while (offset < 0)

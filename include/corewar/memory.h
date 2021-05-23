@@ -9,6 +9,7 @@
 #define D2BF0B2A_7B9B_4B0B_99BD_994AB378702F
 
 #include <corewar/corewar.h>
+#include <stddef.h>
 
 ///
 /// copy `count` bytes from the memory (starting from current position).
@@ -27,7 +28,7 @@ void copy_relative_endian_bytes(void *dest, program_memory_t *mem,
 ///
 /// move to another relative position. adds `increment` to the current position.
 ///
-void jump_relative_bytes(program_memory_t *mem, size_t increment);
+void jump_relative_bytes(program_memory_t *mem, ptrdiff_t increment);
 
 ///
 /// write `count` bytes from src to the memory (starting from current position).
