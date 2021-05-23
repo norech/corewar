@@ -30,5 +30,9 @@ int get_prog_name(parser_t *parser)
             while (consume_whitespaces(parser) != 0
                     || consume_newlines(parser) != 0);
     }
+    if (parser->header->prog_name[0] == '\0')
+        return (parser_error(parser, EXPECT_TOKEN, ".name"));
+    if (parser->header->comment[0] == '\0')
+        return (parser_error(parser, EXPECT_TOKEN, ".comment"));
     return (0);
 }
