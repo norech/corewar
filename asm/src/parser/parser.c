@@ -18,6 +18,7 @@ int parse_next_instruction(instruction_t *out_instr, parser_t *parser)
     consume_whitespaces(parser);
     if ((out_instr->bytecode = consume_instruction_mnemo(parser)) == 0)
         return (parser_error(parser, EXPECT_TOKEN, "mnemonic"));
+    out_instr->position = parser->pos - 1;
     if (consume_whitespaces(parser) == 0)
         return (parser_error(parser, EXPECT_TOKEN, "space"));
     for (int i = 0; i < MAX_ARGS_NUMBER && end_with_comma; i++) {
