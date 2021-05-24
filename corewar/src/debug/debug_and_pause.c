@@ -19,15 +19,15 @@ static const char *OWNER_COLOR[] = {
     "\x1b[48;2;20;20;100m\x1b[37m" };
 
 static void print_debug_byte(runtime_op_t *curr_op, program_memory_t *mem,
-    char *old, int index)
+    memory_slot_t *old, int index)
 {
-    byte_t old_byte = old[index];
-    byte_t new_byte = mem->start_pos[index].data;
+    memory_slot_t old_byte = old[index];
+    memory_slot_t new_byte = mem->start_pos[index];
     int owner = mem->start_pos[index].owner;
 
     if (owner != 0)
         my_printf(OWNER_COLOR[owner % COUNTOF(OWNER_COLOR)]);
-    if (old_byte == new_byte)
+    if (old_byte.data == new_byte.data)
         my_printf("\x1b[2m");
     if (curr_op != NULL
         && mem->start_pos + index >= mem->pos - curr_op->bytecount
@@ -35,18 +35,18 @@ static void print_debug_byte(runtime_op_t *curr_op, program_memory_t *mem,
         my_printf("\x1b[33m");
     if (mem->start_pos + index == mem->pos)
         my_printf("\x1b[1m\x1b[3m");
-    if (my_ucharlen(new_byte, 16) < 2)
+    if (my_ucharlen(new_byte.data, 16) < 2)
         my_printf("0");
-    my_printf("%x\x1b[0m", new_byte);
+    my_printf("%x\x1b[0m", new_byte.data);
 }
 
 void debug_memory(runtime_op_t *curr_op, program_memory_t *mem)
 {
     size_t len = mem->end_pos - mem->start_pos;
-    static char *old = NULL;
+    static memory_slot_t *old = NULL;
 
     if (old == NULL)
-        old = my_calloc(len, sizeof(char));
+        old = my_calloc(len, sizeof(memory_slot_t));
     for (size_t i = 0; i < len; i++) {
         print_debug_byte(curr_op, mem, old, i);
         if (i % 32 == 31 || i == len - 1) {
@@ -55,7 +55,7 @@ void debug_memory(runtime_op_t *curr_op, program_memory_t *mem)
             my_printf(" ");
         }
     }
-    my_memcpy(old, mem->start_pos, len);
+    my_memcpy(old, mem->start_pos, len * sizeof(memory_slot_t));
 }
 
 void debug_and_pause(runtime_op_t *op, program_memory_t *mem)

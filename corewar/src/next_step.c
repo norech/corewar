@@ -117,5 +117,5 @@ int next_step(vm_t *vm)
     }
     if (vm->cycles_until_dump == 1)
         dump_memory(&vm->memory);
-    return (vm->debug ? 0 : check_winner(vm));
+    return (check_winner(vm));
 }
