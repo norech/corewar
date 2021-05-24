@@ -25,7 +25,7 @@ export default async () => {
         printErr: (text) => { handleStderr(text) }
     });
 
-    const compile_string = compiler.cwrap('compile_string', 'number', ['number', 'string', 'string']);
+    const compile_fd = compiler.cwrap('compile_fd', 'number', ['number', 'string', 'string']);
     const write = compiler.cwrap('write', 'number', ['number', 'string', 'number']);
 
     return {
@@ -35,7 +35,7 @@ export default async () => {
             let errors = [];
             handleStdout = (text) => { output += text + "\0" };
             handleStderr = (text) => { errors.push(text); };
-            if (compile_string(1, "input", input) < 0)
+            if (compile_fd(1, "input", input) < 0)
                 throw new CompilationError(errors);
             write(1, "\n", 1);
             handleStdout = defaultStdoutHandler;

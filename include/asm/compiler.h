@@ -10,7 +10,7 @@
 
 #include "asm/parser.h"
 
-int compile_string(int output_fd, char *input_filename, char *input);
+int compile_string(char *output_filename, char *input_filename, char *input);
 
 void show_parser_errors(parser_t *parser);
 void show_analyzer_errors(analyzer_t *analyzer);

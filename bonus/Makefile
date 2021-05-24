@@ -12,7 +12,7 @@ SRC_COREWAR = 	$(wildcard ../corewar/src/**/*.c) \
 				$(wildcard ../corewar/src/*.c)
 
 ASM_EXPORTED = 		[ \
-						"_compile_string", \
+						"_compile_fd", \
 						"_write" \
 					]
 

@@ -57,7 +57,7 @@ hi:	live %234
 				Errors:
 				<pre><code>
 					{#each errors as error}
-						{ error }
+						{ error + "\n" }
 					{/each}
 				</code></pre>
 			{/if}
