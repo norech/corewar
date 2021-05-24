@@ -113,8 +113,8 @@ int next_step(vm_t *vm)
         for (int j = 0; j < instances_count; j++) {
             next_instance_step(vm, i, j);
         }
-        vm->cycles_until_dump--;
     }
+    vm->cycles_until_dump--;
     if (vm->cycles_until_dump == 1)
         dump_memory(&vm->memory);
     return (check_winner(vm));
